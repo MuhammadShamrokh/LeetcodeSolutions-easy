@@ -20,30 +20,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertTrue(solution.isRectangleOverlap(
-                        new int[]{0,0,2,2},
-                        new int[]{1,1,3,3}),
-                "The rectangles [0,0,2,2] and [1,1,3,3] overlap, function returned false.");
+        assertTrue(solution.backspaceCompare("ab#c", "ad#c"), "both ab#c and ad#c should be equal");
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertFalse(solution.isRectangleOverlap(
-                        new int[]{0,0,1,1},
-                        new int[]{1,0,2,1}),
-                "The rectangles [0,0,1,1] and [1,0,2,1] does not overlap, function returned true.");
+        assertTrue(solution.backspaceCompare("ab##", "c#d#"), "both ab## and c#d# should be equal");
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertFalse(solution.isRectangleOverlap(
-                        new int[]{0,0,1,1},
-                        new int[]{2,2,3,3}),
-                "The rectangles [0,0,1,1] and [2,2,3,3] does not overlap, function returned true.");
+        assertFalse(solution.backspaceCompare("a#c", "#b"), "both a#c and b should be equal");
     }
 
 }

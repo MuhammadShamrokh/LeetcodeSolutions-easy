@@ -1,12 +1,38 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 class Solution {
-    public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
-        // Check if one rectangle is completely to the left, right, above, or below the other.
-        return !(rec1[2] <= rec2[0] ||   // rec1 is to the left of rec2
-                rec1[0] >= rec2[2] ||   // rec1 is to the right of rec2
-                rec1[1] >= rec2[3] ||   // rec1 is above rec2
-                rec1[3] <= rec2[1]);    // rec1 is below rec2
+    public boolean backspaceCompare(String s, String t) {
+        Deque<Character> sStack = new ArrayDeque<>();
+        Deque<Character> tStack = new ArrayDeque<>();
+
+        handleStackContent(sStack,s);
+        handleStackContent(tStack,t);
+
+        return areStacksEquals(sStack,tStack);
+    }
+
+    private void handleStackContent(Deque<Character> stack, String string){
+        for(int i=0;i<string.length();i++){
+            // a backspace character, we delete last written character
+            if(string.charAt(i) == '#') {
+                if (!stack.isEmpty())
+                    stack.pop();
+            }
+            else
+                stack.push(string.charAt(i));
+        }
+    }
+
+    private boolean areStacksEquals(Deque<Character> s1, Deque<Character> s2){
+        while(!s1.isEmpty() && !s2.isEmpty()){
+            if(s1.pop() != s2.pop())
+                return false;
+        }
+
+        return s1.isEmpty() && s2.isEmpty();
     }
 }
