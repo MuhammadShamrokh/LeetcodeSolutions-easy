@@ -20,34 +20,30 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        int[][] expected = {{1,0,0},
-                            {0,1,0},
-                            {1,1,1}};
-
-        assertArrayEquals(expected, solution.flipAndInvertImage(new int[][]{{1,1,0},{1,0,1},{0,0,0}}),
-                "The result should be [[1,0,0],[0,1,0],[1,1,1]].");
-
+        assertTrue(solution.isRectangleOverlap(
+                        new int[]{0,0,2,2},
+                        new int[]{1,1,3,3}),
+                "The rectangles [0,0,2,2] and [1,1,3,3] overlap, function returned false.");
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        int[][] expected = {{1,1,0,0},
-                            {0,1,1,0},
-                            {0,0,0,1},
-                            {1,0,1,0}};
-
-        assertArrayEquals(expected, solution.flipAndInvertImage(new int[][]{{1,1,0,0}, {1,0,0,1}, {0,1,1,1}, {1,0,1,0}}),
-                "The result should be [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]].");
-
+        assertFalse(solution.isRectangleOverlap(
+                        new int[]{0,0,1,1},
+                        new int[]{1,0,2,1}),
+                "The rectangles [0,0,1,1] and [1,0,2,1] does not overlap, function returned true.");
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        assertFalse(solution.isRectangleOverlap(
+                        new int[]{0,0,1,1},
+                        new int[]{2,2,3,3}),
+                "The rectangles [0,0,1,1] and [2,2,3,3] does not overlap, function returned true.");
     }
 
 }

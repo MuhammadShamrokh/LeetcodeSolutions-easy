@@ -1,19 +1,12 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
-public class Solution {
-    public int[][] flipAndInvertImage(int[][] image) {
-        int rows = image.length;
-        int columns = image[0].length;
-        int[][] result = new int[rows][columns];
-
-        for(int r=0;r<rows;r++){
-            // flipping and inverting the image row
-            for(int c=0;c<columns;c++){
-                result[r][c] = image[r][columns-c-1] == 0? 1:0;
-            }
-        }
-
-        return result;
+class Solution {
+    public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
+        // Check if one rectangle is completely to the left, right, above, or below the other.
+        return !(rec1[2] <= rec2[0] ||   // rec1 is to the left of rec2
+                rec1[0] >= rec2[2] ||   // rec1 is to the right of rec2
+                rec1[1] >= rec2[3] ||   // rec1 is above rec2
+                rec1[3] <= rec2[1]);    // rec1 is below rec2
     }
 }
