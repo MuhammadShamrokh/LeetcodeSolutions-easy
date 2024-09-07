@@ -1,26 +1,40 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        // hashmap to store all values we have seen
-        Map<Integer,Integer> hashmap = new HashMap<Integer,Integer>();
 
-        for(int i=0;i<nums.length;i++)
-        {
-            // target - current value exist in hashmap, we found two sum
-            if(hashmap.containsKey(target - nums[i]))
-            {
-                return new int[]{hashmap.get(target - nums[i]), i};
+public class Solution {
+    public List<List<Integer>> largeGroupPositions(String s) {
+        List<List<Integer>> result = new ArrayList<>();
+        int intervalStart = 0, intervalEnd = 0;
+        char currentChar = s.charAt(0);
+
+        for(int i=1;i<s.length();i++){
+            // character changed, end of interval
+            if(s.charAt(i) != currentChar){
+                intervalEnd = i-1;
+
+                if(intervalEnd - intervalStart >= 2) {
+                    // checking if this is a new longestInterval
+                    result.add(Arrays.asList(intervalStart, intervalEnd));
+                }
+
+                // setting parameters for the new interval
+                intervalStart = i;
+                currentChar = s.charAt(i);
             }
-            else
-            {
-                hashmap.put(nums[i],i);
-            }
+            //if the character did not change, we have nothing to do.
         }
 
-        return new int[2];
+        intervalEnd = s.length() - 1;
+        // last interval check
+        if(intervalEnd - intervalStart >= 2) {
+            // checking if this is a new longestInterval
+            result.add(Arrays.asList(intervalStart, intervalEnd));
+        }
+
+        return result;
     }
 }
