@@ -20,23 +20,27 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        int [][] resultArray = new int[][]{{3,6}};
-        List<List<Integer>> expected = Arrays.asList(Arrays.asList(3,6));
-        List<List<Integer>> actual = solution.largeGroupPositions("abbxxxxzzy");
+        int[][] expected = {{1,0,0},
+                            {0,1,0},
+                            {1,1,1}};
 
-        assertIterableEquals(expected,actual,"The result should be [[3,6]]");
+        assertArrayEquals(expected, solution.flipAndInvertImage(new int[][]{{1,1,0},{1,0,1},{0,0,0}}),
+                "The result should be [[1,0,0],[0,1,0],[1,1,1]].");
+
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        List<List<Integer>> expected = Arrays.asList(Arrays.asList(3,5),
-                                                     Arrays.asList(6,9),
-                                                     Arrays.asList(12,14));
-        List<List<Integer>> actual = solution.largeGroupPositions("abcdddeeeeaabbbcd");
+        int[][] expected = {{1,1,0,0},
+                            {0,1,1,0},
+                            {0,0,0,1},
+                            {1,0,1,0}};
 
-        assertIterableEquals(expected,actual,"The result should be [[3,5],[6,9],[12,14]]");
+        assertArrayEquals(expected, solution.flipAndInvertImage(new int[][]{{1,1,0,0}, {1,0,0,1}, {0,1,1,1}, {1,0,1,0}}),
+                "The result should be [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]].");
+
     }
 
     @Test
