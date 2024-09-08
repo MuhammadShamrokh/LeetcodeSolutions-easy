@@ -20,28 +20,34 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertTrue(solution.lemonadeChange(new int[]{5,5,5,10,20}),"Can give change back to [5,5,5,10,20] Payments");
+        int[][] expected = new int[][]{{1,4,7},{2,5,8},{3,6,9}};
+
+        assertArrayEquals(expected, solution.transpose(new int[][]{{1,2,3},{4,5,6},{7,8,9}}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertFalse(solution.lemonadeChange(new int[]{5,5,10,10,20}), "Can NOT give change back to [5,5,5,10,20] Payments.");
+        int[][] expected = new int[][]{{1,4},{2,5},{3,6}};
+
+        assertArrayEquals(expected, solution.transpose(new int[][]{{1,2,3},{4,5,6}}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertTrue(solution.lemonadeChange(new int[]{5,5,5,5,5}),"Can give change back to [5,5,5,5,5] Payments.");
+        int [][] expected = new int[][]{{1}};
+
+        assertArrayEquals(expected, solution.transpose(new int[][]{{1}}));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-        assertTrue(solution.lemonadeChange(new int[]{}),"There was no purchases, which mean everything is ok.");
+
     }
 
 }
