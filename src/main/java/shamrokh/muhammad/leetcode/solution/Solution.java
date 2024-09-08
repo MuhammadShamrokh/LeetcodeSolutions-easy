@@ -4,56 +4,48 @@ package shamrokh.muhammad.leetcode.solution;
 import java.util.*;
 
 class Solution {
-    public boolean buddyStrings(String s, String goal) {
-        // edge case: not same length strings, for sure not buddy strings
-        if(s.length() != goal.length())
-            return false;
+    private final int FIVE_CHANGE_IDX = 0;
+    private final int TEN_CHANGE_IDX = 1;
+    public boolean lemonadeChange(int[] bills) {
+        int[] change = new int[2];
 
-        // if s and goal strings are equals, we check if we have the same letter twice in s so we switch them
-        // otherwise, we return false
-        if(s.equals(goal)){
-            return checkIfStringHasTwoSameLetters(s);
-        }
-
-        // if we reach here that mean that s and goal are not equal (with same length)
-        // we check the number of different chars
-        //          if 2 only then return true otherwise false;
-        int numOfDifferences = 0;
-        int difOneIndex =0;
-        int difTwoIndex = 0;
-
-        for(int i=0;i<s.length();i++){
-            if(s.charAt(i) != goal.charAt(i)) {
-                numOfDifferences++;
-                if(numOfDifferences == 1){
-                    difOneIndex = i;
-                }
-                if(numOfDifferences == 2){
-                    difTwoIndex = i;
-
-                    boolean equals = s.charAt(difOneIndex) == goal.charAt(difTwoIndex) && s.charAt(difTwoIndex) == goal.charAt(difOneIndex);
-                    if(!equals)
+        for(int i=0;i<bills.length;i++){
+            switch(bills[i])
+            {
+                case 5:
+                    // we keep the five as a change for future purchases
+                    change[FIVE_CHANGE_IDX]++;
+                    break;
+                case 10:
+                    // we dont have to give back
+                    if(change[FIVE_CHANGE_IDX] == 0)
                         return false;
-                }
 
-                if(numOfDifferences > 2)
-                    return false;
+                    //we had change, we update array of changes
+                    change[TEN_CHANGE_IDX]++;
+                    change[FIVE_CHANGE_IDX]--;
+                    break;
+                case 20:
+                    // we prefer to get rid of 10 and keep 5 for future purchases
+                    if(change[FIVE_CHANGE_IDX] > 0 && change[TEN_CHANGE_IDX] > 0){
+                        change[TEN_CHANGE_IDX]--;
+                        change[FIVE_CHANGE_IDX]--;
+                    }
+                    // no tens to give back, we must give three 5's instead
+                    else if(change[FIVE_CHANGE_IDX] >= 3){
+                        change[FIVE_CHANGE_IDX]-=3;
+                    }
+                    else{
+                        // no change to give back
+                        return false;
+                    }
+                    break;
+                default:
+                    throw new RuntimeException("Invalid Payment value");
             }
         }
 
-        return numOfDifferences == 2;
-    }
-
-    private boolean checkIfStringHasTwoSameLetters(String s) {
-        Set<Character> stringCharacters = new HashSet<>();
-
-        for(int i=0;i<s.length();i++){
-            if(stringCharacters.contains(s.charAt(i)))
-                return true;
-
-            stringCharacters.add(s.charAt(i));
-        }
-
-        return false;
+        // if we reach here, that means we made all the sells and gave change to everyone
+        return true;
     }
 }

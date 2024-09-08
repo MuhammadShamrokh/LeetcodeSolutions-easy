@@ -20,28 +20,28 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertTrue(solution.buddyStrings("ab","ba"), "the strings 'ab' and 'ba' are buddy strings");
+        assertTrue(solution.lemonadeChange(new int[]{5,5,5,10,20}),"Can give change back to [5,5,5,10,20] Payments");
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertFalse(solution.buddyStrings("ab","ab"), "the strings 'ab' and 'ab' are NOT buddy strings");
+        assertFalse(solution.lemonadeChange(new int[]{5,5,10,10,20}), "Can NOT give change back to [5,5,5,10,20] Payments.");
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertTrue(solution.buddyStrings("aa","aa"), "the strings 'aa' and 'aa' are buddy strings");
+        assertTrue(solution.lemonadeChange(new int[]{5,5,5,5,5}),"Can give change back to [5,5,5,5,5] Payments.");
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-        assertFalse(solution.buddyStrings("aa","bb"), "the strings 'aa' and 'bb' are NOT buddy strings");
+        assertTrue(solution.lemonadeChange(new int[]{}),"There was no purchases, which mean everything is ok.");
     }
 
 }
