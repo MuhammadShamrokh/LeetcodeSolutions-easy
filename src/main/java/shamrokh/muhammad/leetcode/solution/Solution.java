@@ -1,38 +1,59 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 class Solution {
-    public boolean backspaceCompare(String s, String t) {
-        Deque<Character> sStack = new ArrayDeque<>();
-        Deque<Character> tStack = new ArrayDeque<>();
+    public boolean buddyStrings(String s, String goal) {
+        // edge case: not same length strings, for sure not buddy strings
+        if(s.length() != goal.length())
+            return false;
 
-        handleStackContent(sStack,s);
-        handleStackContent(tStack,t);
+        // if s and goal strings are equals, we check if we have the same letter twice in s so we switch them
+        // otherwise, we return false
+        if(s.equals(goal)){
+            return checkIfStringHasTwoSameLetters(s);
+        }
 
-        return areStacksEquals(sStack,tStack);
-    }
+        // if we reach here that mean that s and goal are not equal (with same length)
+        // we check the number of different chars
+        //          if 2 only then return true otherwise false;
+        int numOfDifferences = 0;
+        int difOneIndex =0;
+        int difTwoIndex = 0;
 
-    private void handleStackContent(Deque<Character> stack, String string){
-        for(int i=0;i<string.length();i++){
-            // a backspace character, we delete last written character
-            if(string.charAt(i) == '#') {
-                if (!stack.isEmpty())
-                    stack.pop();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i) != goal.charAt(i)) {
+                numOfDifferences++;
+                if(numOfDifferences == 1){
+                    difOneIndex = i;
+                }
+                if(numOfDifferences == 2){
+                    difTwoIndex = i;
+
+                    boolean equals = s.charAt(difOneIndex) == goal.charAt(difTwoIndex) && s.charAt(difTwoIndex) == goal.charAt(difOneIndex);
+                    if(!equals)
+                        return false;
+                }
+
+                if(numOfDifferences > 2)
+                    return false;
             }
-            else
-                stack.push(string.charAt(i));
         }
+
+        return numOfDifferences == 2;
     }
 
-    private boolean areStacksEquals(Deque<Character> s1, Deque<Character> s2){
-        while(!s1.isEmpty() && !s2.isEmpty()){
-            if(s1.pop() != s2.pop())
-                return false;
+    private boolean checkIfStringHasTwoSameLetters(String s) {
+        Set<Character> stringCharacters = new HashSet<>();
+
+        for(int i=0;i<s.length();i++){
+            if(stringCharacters.contains(s.charAt(i)))
+                return true;
+
+            stringCharacters.add(s.charAt(i));
         }
 
-        return s1.isEmpty() && s2.isEmpty();
+        return false;
     }
 }

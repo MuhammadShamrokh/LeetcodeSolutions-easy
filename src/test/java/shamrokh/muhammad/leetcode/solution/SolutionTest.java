@@ -20,21 +20,28 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertTrue(solution.backspaceCompare("ab#c", "ad#c"), "both ab#c and ad#c should be equal");
+        assertTrue(solution.buddyStrings("ab","ba"), "the strings 'ab' and 'ba' are buddy strings");
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertTrue(solution.backspaceCompare("ab##", "c#d#"), "both ab## and c#d# should be equal");
+        assertFalse(solution.buddyStrings("ab","ab"), "the strings 'ab' and 'ab' are NOT buddy strings");
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertFalse(solution.backspaceCompare("a#c", "#b"), "both a#c and b should be equal");
+        assertTrue(solution.buddyStrings("aa","aa"), "the strings 'aa' and 'aa' are buddy strings");
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Test 4")
+    void TestFour(){
+        assertFalse(solution.buddyStrings("aa","bb"), "the strings 'aa' and 'bb' are NOT buddy strings");
     }
 
 }
