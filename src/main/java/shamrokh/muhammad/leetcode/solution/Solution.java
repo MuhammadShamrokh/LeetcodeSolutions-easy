@@ -1,30 +1,34 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
+import shamrokh.muhammad.leetcode.datastructure.TreeNode;
+
 import java.util.*;
 
 class Solution {
-    public int binaryGap(int n) {
-        int longestGap = 0;
-        int prevOneBitLocation = 0;
-        int location = 1;
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> treeOneLeavesSequence = new LinkedList<>();
+        List<Integer> treeTwoLeavesSequence = new LinkedList<>();
 
-        while(n>0){
-            // turned on bit was found
-            if(n%2 != 0){
-                // first 1 bit appearance
-                if(prevOneBitLocation == 0)
-                    prevOneBitLocation = location;
-                else{
-                    longestGap = Math.max(longestGap, location - prevOneBitLocation);
-                    prevOneBitLocation = location;
-                }
-            }
+        // recursively build the leaves sequence lists
+        getTreeLeavesSequenceListRecursive(root1, treeOneLeavesSequence);
+        getTreeLeavesSequenceListRecursive(root2, treeTwoLeavesSequence);
 
-            location ++;
-            n /= 2;
+        // return if sequences are equals or not
+        return treeOneLeavesSequence.equals(treeTwoLeavesSequence);
+    }
+
+    private void getTreeLeavesSequenceListRecursive(TreeNode root, List<Integer> leavesSequencelist) {
+        if(root == null)
+            return;
+        if(root.left == null && root.right == null) {
+            leavesSequencelist.add(root.val);
+            return;
         }
 
-        return longestGap;
+
+        // scan the tree (left child first then right one to build the leaves sequence list
+        getTreeLeavesSequenceListRecursive(root.left, leavesSequencelist);
+        getTreeLeavesSequenceListRecursive(root.right, leavesSequencelist);
     }
 }

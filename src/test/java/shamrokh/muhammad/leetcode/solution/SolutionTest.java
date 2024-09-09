@@ -20,36 +20,28 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        int expected = 2;
 
-        assertEquals(expected, solution.binaryGap(22));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        int expected = 0;
 
-        assertEquals(expected, solution.binaryGap(8));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        int expected = 1;
 
-        assertEquals(expected, solution.binaryGap(7));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-        int expected = 2;
 
-        assertEquals(expected, solution.binaryGap(5));
     }
 
 }
