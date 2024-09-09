@@ -1,34 +1,27 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
+import shamrokh.muhammad.leetcode.datastructure.ListNode;
 import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 
 import java.util.*;
 
 class Solution {
-    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
-        List<Integer> treeOneLeavesSequence = new LinkedList<>();
-        List<Integer> treeTwoLeavesSequence = new LinkedList<>();
+    public ListNode middleNode(ListNode head) {
+        ListNode fastScanner = head;
+        ListNode slowScanner = head;
+        int nodesInPathCount = 0;
 
-        // recursively build the leaves sequence lists
-        getTreeLeavesSequenceListRecursive(root1, treeOneLeavesSequence);
-        getTreeLeavesSequenceListRecursive(root2, treeTwoLeavesSequence);
-
-        // return if sequences are equals or not
-        return treeOneLeavesSequence.equals(treeTwoLeavesSequence);
-    }
-
-    private void getTreeLeavesSequenceListRecursive(TreeNode root, List<Integer> leavesSequencelist) {
-        if(root == null)
-            return;
-        if(root.left == null && root.right == null) {
-            leavesSequencelist.add(root.val);
-            return;
+        // implement slow and fast scanner method to find middle of listNode
+        while(fastScanner.next != null && fastScanner.next.next != null){
+            fastScanner = fastScanner.next.next;
+            slowScanner = slowScanner.next;
+            nodesInPathCount++;
         }
 
-
-        // scan the tree (left child first then right one to build the leaves sequence list
-        getTreeLeavesSequenceListRecursive(root.left, leavesSequencelist);
-        getTreeLeavesSequenceListRecursive(root.right, leavesSequencelist);
+        // if while loop stopped because fastScanner.next == null (this scanner jump by 2 nodes)
+        //    the size of the list is odd, which mean slowScanner is the only middle of the list.
+        // otherwise we have 2 middle nodes, we return the 2nd node.
+        return fastScanner.next == null ? slowScanner: slowScanner.next;
     }
 }
