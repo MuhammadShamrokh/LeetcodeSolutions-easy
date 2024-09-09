@@ -20,34 +20,36 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        int[][] expected = new int[][]{{1,4,7},{2,5,8},{3,6,9}};
+        int expected = 2;
 
-        assertArrayEquals(expected, solution.transpose(new int[][]{{1,2,3},{4,5,6},{7,8,9}}));
+        assertEquals(expected, solution.binaryGap(22));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        int[][] expected = new int[][]{{1,4},{2,5},{3,6}};
+        int expected = 0;
 
-        assertArrayEquals(expected, solution.transpose(new int[][]{{1,2,3},{4,5,6}}));
+        assertEquals(expected, solution.binaryGap(8));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        int [][] expected = new int[][]{{1}};
+        int expected = 1;
 
-        assertArrayEquals(expected, solution.transpose(new int[][]{{1}}));
+        assertEquals(expected, solution.binaryGap(7));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
+        int expected = 2;
 
+        assertEquals(expected, solution.binaryGap(5));
     }
 
 }

@@ -4,18 +4,27 @@ package shamrokh.muhammad.leetcode.solution;
 import java.util.*;
 
 class Solution {
-    public int[][] transpose(int[][] matrix) {
-        int rows = matrix.length;
-        int columns = matrix[0].length;
-        int [][] transpose = new int[columns][rows];
+    public int binaryGap(int n) {
+        int longestGap = 0;
+        int prevOneBitLocation = 0;
+        int location = 1;
 
-        // executing transpose
-        for(int r=0;r<rows;r++){
-            for(int c=0;c<columns;c++){
-                transpose[c][r] = matrix[r][c];
+        while(n>0){
+            // turned on bit was found
+            if(n%2 != 0){
+                // first 1 bit appearance
+                if(prevOneBitLocation == 0)
+                    prevOneBitLocation = location;
+                else{
+                    longestGap = Math.max(longestGap, location - prevOneBitLocation);
+                    prevOneBitLocation = location;
+                }
             }
+
+            location ++;
+            n /= 2;
         }
 
-        return transpose;
+        return longestGap;
     }
 }
