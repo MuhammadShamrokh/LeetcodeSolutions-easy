@@ -7,31 +7,40 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
 class Solution {
-    public int projectionArea(int[][] grid) {
-        int n = grid.length;
-        int top = 0, front = 0, side = 0;
+    public String[] uncommonFromSentences(String s1, String s2) {
+        List<String> uncommonWords = new ArrayList<>();
+        // counting words in each sentence and storing result into maps
+        Map<String,Integer> firstStringWordsCount = countStringWords(s1);
+        Map<String,Integer> secondStringWordsCount = countStringWords(s2);
 
-        for (int i = 0; i < n; i++) {
-            int maxRow = 0;  // Maximum in row (front view)
-            int maxCol = 0;  // Maximum in column (side view)
-
-            for (int j = 0; j < n; j++) {
-                // Top projection: count all non-zero grid cells
-                if (grid[i][j] > 0) {
-                    top++;
-                }
-
-                // Front projection: max in each row
-                maxRow = Math.max(maxRow, grid[i][j]);
-
-                // Side projection: max in each column
-                maxCol = Math.max(maxCol, grid[j][i]);
-            }
-
-            front += maxRow;  // Add max of the row to the front projection
-            side += maxCol;   // Add max of the column to the side projection
+        // scanning first sentence words to find uncommon words in string one
+        for(Map.Entry<String,Integer> entry: firstStringWordsCount.entrySet()){
+            if(entry.getValue() == 1 && !secondStringWordsCount.containsKey(entry.getKey()))
+                uncommonWords.add(entry.getKey());
         }
 
-        return top + front + side;
+        // scanning second sentence words to find uncommon words in string two
+        for(Map.Entry<String,Integer> entry: secondStringWordsCount.entrySet()){
+            if(entry.getValue() == 1 && !firstStringWordsCount.containsKey(entry.getKey()))
+                uncommonWords.add(entry.getKey());
+        }
+
+        String[] result = new String[uncommonWords.size()];
+        for(int i=0;i<uncommonWords.size();i++){
+            result[i] = uncommonWords.get(i);
+        }
+
+        return result;
+    }
+
+    private Map<String, Integer> countStringWords(String sentence){
+        Map<String,Integer> sentenceWordCount = new HashMap<>();
+
+        // counting first string words appearances
+        for(String word: sentence.split(" ")){
+            sentenceWordCount.put(word, sentenceWordCount.getOrDefault(word,0)+1);
+        }
+
+        return sentenceWordCount;
     }
 }
