@@ -7,21 +7,31 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
 class Solution {
-    public ListNode middleNode(ListNode head) {
-        ListNode fastScanner = head;
-        ListNode slowScanner = head;
-        int nodesInPathCount = 0;
+    public int projectionArea(int[][] grid) {
+        int n = grid.length;
+        int top = 0, front = 0, side = 0;
 
-        // implement slow and fast scanner method to find middle of listNode
-        while(fastScanner.next != null && fastScanner.next.next != null){
-            fastScanner = fastScanner.next.next;
-            slowScanner = slowScanner.next;
-            nodesInPathCount++;
+        for (int i = 0; i < n; i++) {
+            int maxRow = 0;  // Maximum in row (front view)
+            int maxCol = 0;  // Maximum in column (side view)
+
+            for (int j = 0; j < n; j++) {
+                // Top projection: count all non-zero grid cells
+                if (grid[i][j] > 0) {
+                    top++;
+                }
+
+                // Front projection: max in each row
+                maxRow = Math.max(maxRow, grid[i][j]);
+
+                // Side projection: max in each column
+                maxCol = Math.max(maxCol, grid[j][i]);
+            }
+
+            front += maxRow;  // Add max of the row to the front projection
+            side += maxCol;   // Add max of the column to the side projection
         }
 
-        // if while loop stopped because fastScanner.next == null (this scanner jump by 2 nodes)
-        //    the size of the list is odd, which mean slowScanner is the only middle of the list.
-        // otherwise we have 2 middle nodes, we return the 2nd node.
-        return fastScanner.next == null ? slowScanner: slowScanner.next;
+        return top + front + side;
     }
 }
