@@ -5,31 +5,35 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
 class Solution {
-    public int[] fairCandySwap(int[] aliceSizes, int[] bobSizes) {
-        Set<Integer> bobSizesSet = new HashSet<>();
-        // calculate the total amount of candies that bob and alice has
-        int sumAlice = 0;
-        int sumBob = 0;
-        for(int size: aliceSizes)
-            sumAlice += size;
-        for(int size: bobSizes){
-            sumBob += size;
-            bobSizesSet.add(size);
-        }
+    public int surfaceArea(int[][] grid) {
+        int n = grid.length;
+        int surfaceArea = 0;
 
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int v = grid[i][j];
 
-        // calculate the delta
-        int delta = (sumBob - sumAlice) / 2;
+                // If there are cubes in this cell
+                if (v > 0) {
+                    // Add surface area of this stack without considering adjacency
+                    surfaceArea += 6 * v;
 
-        // Iterate over Alice's candy sizes
-        for (int aliceSize : aliceSizes) {
-            // Check if there is a candy in Bob's set that matches x + delta
-            if (bobSizesSet.contains(aliceSize + delta)) {
-                return new int[] {aliceSize, aliceSize + delta};
+                    // Subtract internal surfaces for stacked cubes in the same column
+                    surfaceArea -= 2 * (v - 1);
+
+                    // Check adjacent cubes in row (left neighbor)
+                    if (i > 0) {
+                        surfaceArea -= 2 * Math.min(grid[i][j], grid[i - 1][j]);
+                    }
+
+                    // Check adjacent cubes in column (top neighbor)
+                    if (j > 0) {
+                        surfaceArea -= 2 * Math.min(grid[i][j], grid[i][j - 1]);
+                    }
+                }
             }
         }
 
-        //it is guarantee that we have a solution, we wont reach here
-        return new int[]{};
+        return surfaceArea;
     }
 }
