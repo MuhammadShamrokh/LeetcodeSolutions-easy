@@ -8,10 +8,8 @@ class Solution {
     public boolean isMonotonic(int[] nums) {
         if(nums[0] > nums[nums.length-1])
             return checkIfMonotonicDecreasingArray(nums);
-        else if(nums[0] < nums[nums.length-1])
-            return checkIfMonotonicIncreasingArray(nums);
-        else // all elements are equal
-            return true;
+
+        return checkIfMonotonicIncreasingArray(nums);
     }
 
     private boolean checkIfMonotonicIncreasingArray(int[] nums) {
