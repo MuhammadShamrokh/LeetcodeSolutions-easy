@@ -22,28 +22,28 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-
+        assertTrue(solution.isMonotonic(new int[]{1,2,2,3}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-
+        assertTrue(solution.isMonotonic(new int[]{6,5,4,4}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        assertFalse(solution.isMonotonic(new int[]{1,3,2}));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-
+        assertTrue(solution.isMonotonic(new int[]{1}));
     }
 
 }
