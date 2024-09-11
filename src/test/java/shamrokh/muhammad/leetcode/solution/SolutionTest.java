@@ -22,28 +22,27 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        Set<String> expected = new HashSet<>(Arrays.asList("sweet","sour"));
+        int[] expected = new int[]{1,2};
 
-        assertIterableEquals(expected,
-                new HashSet<>(Arrays.asList(solution.uncommonFromSentences("this apple is sweet","this apple is sour"))));
-
+        assertArrayEquals(expected, solution.fairCandySwap(new int[]{1,1}, new int[]{2,2}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        Set<String> expected = new HashSet<>(List.of("banana"));
+        int[] expected = new int[]{1,2};
 
-        assertIterableEquals(expected,
-                new HashSet<>(Arrays.asList(solution.uncommonFromSentences("apple apple","banana"))));
+        assertArrayEquals(expected, solution.fairCandySwap(new int[]{1,2}, new int[]{2,3}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
+        int[] expected = new int[]{2,3};
 
+        assertArrayEquals(expected, solution.fairCandySwap(new int[]{2}, new int[]{1,3}));
     }
 
     @Test
