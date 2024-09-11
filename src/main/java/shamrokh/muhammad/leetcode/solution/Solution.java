@@ -1,9 +1,7 @@
 package shamrokh.muhammad.leetcode.solution;
 
-
 import shamrokh.muhammad.leetcode.datastructure.ListNode;
 import shamrokh.muhammad.leetcode.datastructure.TreeNode;
-
 import java.util.*;
 
 class Solution {
@@ -21,13 +19,13 @@ class Solution {
 
 
         // calculate the delta
-        int delta = (sumBob + sumAlice) / 2;
+        int delta = (sumBob - sumAlice) / 2;
 
         // Iterate over Alice's candy sizes
-        for (int y : aliceSizes) {
+        for (int aliceSize : aliceSizes) {
             // Check if there is a candy in Bob's set that matches x + delta
-            if (bobSizesSet.contains(y - delta)) {
-                return new int[] {y, y - delta};
+            if (bobSizesSet.contains(aliceSize + delta)) {
+                return new int[] {aliceSize, aliceSize + delta};
             }
         }
 
