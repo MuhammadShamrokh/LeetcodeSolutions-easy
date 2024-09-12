@@ -5,29 +5,22 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
 class Solution {
-    public TreeNode increasingBST(TreeNode root) {
-        List<Integer> sortedValues = new ArrayList<>();
+    public int[] sortArrayByParity(int[] nums) {
+        int leftIndex = 0;
+        int rightIndex = nums.length - 1;
 
-        // creating a sorted list from root tree (inorder recursive scan)
-        inOrderScanTreeAndRetrieveValuesArray(root, sortedValues);
-
-        // scanning over array elements to build requested TreeNode
-        TreeNode result = new TreeNode(sortedValues.get(0));
-        TreeNode scanner = result;
-        for(int i=1;i<sortedValues.size();i++){
-            scanner.right = new TreeNode(sortedValues.get(i));
-            scanner = scanner.right;
+        while(leftIndex < rightIndex){
+            if(nums[leftIndex] %2 == 0) {
+                leftIndex++;
+            }
+            else {
+                int temp = nums[leftIndex];
+                nums[leftIndex] = nums[rightIndex];
+                nums[rightIndex] = temp;
+                rightIndex--;
+            }
         }
 
-        return result;
-    }
-
-    private void inOrderScanTreeAndRetrieveValuesArray(TreeNode root, List<Integer> list) {
-        if(root == null)
-            return;
-
-        inOrderScanTreeAndRetrieveValuesArray(root.left, list);
-        list.add(root.val);
-        inOrderScanTreeAndRetrieveValuesArray(root.right, list);
+        return nums;
     }
 }
