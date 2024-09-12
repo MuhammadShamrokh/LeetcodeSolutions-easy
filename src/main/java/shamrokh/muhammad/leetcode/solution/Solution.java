@@ -5,28 +5,29 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
 class Solution {
-    public boolean isMonotonic(int[] nums) {
-        if(nums[0] > nums[nums.length-1])
-            return checkIfMonotonicDecreasingArray(nums);
+    public TreeNode increasingBST(TreeNode root) {
+        List<Integer> sortedValues = new ArrayList<>();
 
-        return checkIfMonotonicIncreasingArray(nums);
-    }
+        // creating a sorted list from root tree (inorder recursive scan)
+        inOrderScanTreeAndRetrieveValuesArray(root, sortedValues);
 
-    private boolean checkIfMonotonicIncreasingArray(int[] nums) {
-        for(int i=0;i<nums.length - 1;i++){
-            if(nums[i] > nums[i+1])
-                return false;
+        // scanning over array elements to build requested TreeNode
+        TreeNode result = new TreeNode(sortedValues.get(0));
+        TreeNode scanner = result;
+        for(int i=1;i<sortedValues.size();i++){
+            scanner.right = new TreeNode(sortedValues.get(i));
+            scanner = scanner.right;
         }
 
-        return true;
+        return result;
     }
 
-    private boolean checkIfMonotonicDecreasingArray(int[] nums) {
-        for(int i=0;i<nums.length - 1;i++){
-            if(nums[i] < nums[i+1])
-                return false;
-        }
+    private void inOrderScanTreeAndRetrieveValuesArray(TreeNode root, List<Integer> list) {
+        if(root == null)
+            return;
 
-        return true;
+        inOrderScanTreeAndRetrieveValuesArray(root.left, list);
+        list.add(root.val);
+        inOrderScanTreeAndRetrieveValuesArray(root.right, list);
     }
 }
