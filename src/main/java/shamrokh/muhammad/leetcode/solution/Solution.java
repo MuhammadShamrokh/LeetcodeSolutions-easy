@@ -5,28 +5,32 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
 class Solution {
-    public int smallestRangeI(int[] nums, int k) {
-        int max = nums[0];
-        // highest number in array is 10000 as given in the question
-        int min = 10000;
+    public boolean hasGroupsSizeX(int[] deck) {
+        Map<Integer, Integer> cardsCountMap = new HashMap<>();
 
+        // counting appearances of each card
+        for(int card : deck)
+            cardsCountMap.put(card, cardsCountMap.getOrDefault(card, 0) + 1);
 
-        for(int i = 0; i < nums.length;i++){
-            if(nums[i] > max){
-                max = nums[i];
-            }
-
-            if(nums[i] < min){
-                min = nums[i];
-            }
+        // calculating the greatest common divisor
+        int gcd = -1;
+        for(int count: cardsCountMap.values()){
+            if(gcd == -1)
+                gcd = count;
+            else
+                gcd = GCD(gcd,count);
         }
 
-        // we add the k to the minimum number and subtract k to the maximum number
-        // to receive the minimum possible result
-        min += k;
-        max -= k;
+        // if greater common divisor is larger than 1, we can split the deck into groups
+        return gcd>1;
 
-        // if the result is lower than 0, that mean we subtract less than k from the max value inorder to get lower value (which is zero)
-        return Math.max(0, max - min);
+    }
+
+    private int GCD(int a, int b){
+        // The GCD is commonly computed using the Euclidean algorithm
+        if(b==0)
+            return a;
+
+        return GCD(b, a%b);
     }
 }
