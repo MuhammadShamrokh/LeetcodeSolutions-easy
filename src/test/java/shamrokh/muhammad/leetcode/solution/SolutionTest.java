@@ -22,13 +22,20 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
+        int expected = 2;
 
+        assertEquals(expected,
+                new Solution().numUniqueEmails(new String[]{"test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
+        int expected = 3;
+
+        assertEquals(expected,
+                new Solution().numUniqueEmails(new String[]{"a@leetcode.com","b@leetcode.com","c@leetcode.com"}));
 
     }
 
