@@ -4,35 +4,42 @@ import shamrokh.muhammad.leetcode.datastructure.ListNode;
 import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
-class Solution {
-    public String reverseOnlyLetters(String s) {
-        // we convert s into a char[] since String is immutable
-        char[] reversedString= s.toCharArray();
+public class Solution {
+    public int[] sortArrayByParityII(int[] nums) {
+        int nextEvenIndex = 0;
+        int nextOddIndex = 1;
+        int numsScanner = 0;
 
-        int startIndex = 0;
-        int endIndex = s.length() - 1;
+        while(numsScanner < nums.length){
+            // good situation, no need to do swapping
+            if((numsScanner % 2 == 0 && nums[numsScanner]% 2 == 0)
+                    || (numsScanner % 2 == 1 && nums[numsScanner]%2 == 1 )){
+                // updating next available odd/even index
+                if(numsScanner == nextEvenIndex)
+                    nextEvenIndex += 2;
+                else if(numsScanner == nextOddIndex)
+                    nextOddIndex +=2;
 
-        while(startIndex < endIndex){
-            // we skip startIndex since it is not pointing to english letter
-            if(!Character.isAlphabetic(reversedString[startIndex])) {
-                startIndex++;
+                // updating scanning index
+                numsScanner++;
             }
-            // we skip endIndex since it is not pointing to english letter
-            if((!Character.isAlphabetic(reversedString[endIndex])))
-                endIndex--;
-            // both startIndex and endIndex are pointing to english letter, we swap them.
-            if(Character.isAlphabetic(reversedString[startIndex])
-                    && Character.isAlphabetic(reversedString[endIndex])){
-                char tmp = reversedString[startIndex];
-                reversedString[startIndex] = reversedString[endIndex];
-                reversedString[endIndex] = tmp;
-
-                startIndex++;
-                endIndex--;
+            // currently at even idx which has odd number
+            else if(numsScanner % 2 == 0){
+                swap(nums, numsScanner, nextOddIndex);
+                nextOddIndex += 2;
+            }
+            else if(numsScanner % 2 == 1){
+                swap(nums, numsScanner, nextEvenIndex);
+                nextEvenIndex += 2;
             }
         }
 
-        // convert char[] into String
-        return new String(reversedString);
+        return nums;
+    }
+
+    private void swap(int[] nums, int idx1, int idx2){
+        int tmp=nums[idx1];
+        nums[idx1] = nums[idx2];
+        nums[idx2] = tmp;
     }
 }

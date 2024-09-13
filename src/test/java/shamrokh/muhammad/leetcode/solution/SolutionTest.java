@@ -22,27 +22,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        String expected = "dc-ba";
 
-        assertEquals(expected, solution.reverseOnlyLetters("ab-cd"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        String expected = "j-Ih-gfE-dCba";
 
-        assertEquals(expected, solution.reverseOnlyLetters("a-bC-dEf-ghIj"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        String expected = "Qedo1ct-eeLg=ntse-T!";
 
-        assertEquals(expected, solution.reverseOnlyLetters("Test1ng-Leet=code-Q!"));
     }
 
     @Test
