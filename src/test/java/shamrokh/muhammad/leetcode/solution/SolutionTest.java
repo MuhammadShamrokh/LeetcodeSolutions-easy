@@ -22,24 +22,27 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertTrue(solution.hasGroupsSizeX(new int[]{1,2,3,4,4,3,2,1} ),
-                "There is a possible partition for the deck [1,2,3,4,4,3,2,1]");
+        String expected = "dc-ba";
+
+        assertEquals(expected, solution.reverseOnlyLetters("ab-cd"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertFalse(solution.hasGroupsSizeX(new int[]{1,1,1,2,2,2,3,3} ),
-                "There is No possible partition for the deck [1,2,3,4,4,3,2,1]");
+        String expected = "j-Ih-gfE-dCba";
+
+        assertEquals(expected, solution.reverseOnlyLetters("a-bC-dEf-ghIj"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertTrue(solution.hasGroupsSizeX(new int[]{1,1,2,2,2,2} ),
-                "There is a possible partition for the deck [1,1,2,2,2,2]");
+        String expected = "Qedo1ct-eeLg=ntse-T!";
+
+        assertEquals(expected, solution.reverseOnlyLetters("Test1ng-Leet=code-Q!"));
     }
 
     @Test

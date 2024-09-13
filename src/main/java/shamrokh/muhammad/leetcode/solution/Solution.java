@@ -5,32 +5,34 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
 class Solution {
-    public boolean hasGroupsSizeX(int[] deck) {
-        Map<Integer, Integer> cardsCountMap = new HashMap<>();
+    public String reverseOnlyLetters(String s) {
+        // we convert s into a char[] since String is immutable
+        char[] reversedString= s.toCharArray();
 
-        // counting appearances of each card
-        for(int card : deck)
-            cardsCountMap.put(card, cardsCountMap.getOrDefault(card, 0) + 1);
+        int startIndex = 0;
+        int endIndex = s.length() - 1;
 
-        // calculating the greatest common divisor
-        int gcd = -1;
-        for(int count: cardsCountMap.values()){
-            if(gcd == -1)
-                gcd = count;
-            else
-                gcd = GCD(gcd,count);
+        while(startIndex < endIndex){
+            // we skip startIndex since it is not pointing to english letter
+            if(!Character.isAlphabetic(reversedString[startIndex])) {
+                startIndex++;
+            }
+            // we skip endIndex since it is not pointing to english letter
+            if((!Character.isAlphabetic(reversedString[endIndex])))
+                endIndex--;
+            // both startIndex and endIndex are pointing to english letter, we swap them.
+            if(Character.isAlphabetic(reversedString[startIndex])
+                    && Character.isAlphabetic(reversedString[endIndex])){
+                char tmp = reversedString[startIndex];
+                reversedString[startIndex] = reversedString[endIndex];
+                reversedString[endIndex] = tmp;
+
+                startIndex++;
+                endIndex--;
+            }
         }
 
-        // if greater common divisor is larger than 1, we can split the deck into groups
-        return gcd>1;
-
-    }
-
-    private int GCD(int a, int b){
-        // The GCD is commonly computed using the Euclidean algorithm
-        if(b==0)
-            return a;
-
-        return GCD(b, a%b);
+        // convert char[] into String
+        return new String(reversedString);
     }
 }
