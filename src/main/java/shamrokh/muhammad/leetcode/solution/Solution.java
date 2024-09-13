@@ -5,41 +5,43 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 import java.util.*;
 
 public class Solution {
-    public int[] sortArrayByParityII(int[] nums) {
-        int nextEvenIndex = 0;
-        int nextOddIndex = 1;
-        int numsScanner = 0;
+    public boolean isLongPressedName(String name, String typed) {
+        int nameIndexScanner = 0;
+        int typedIndexScanner = 0;
 
-        while(numsScanner < nums.length){
-            // good situation, no need to do swapping
-            if((numsScanner % 2 == 0 && nums[numsScanner]% 2 == 0)
-                    || (numsScanner % 2 == 1 && nums[numsScanner]%2 == 1 )){
-                // updating next available odd/even index
-                if(numsScanner == nextEvenIndex)
-                    nextEvenIndex += 2;
-                else if(numsScanner == nextOddIndex)
-                    nextOddIndex +=2;
+        //edge case, string starts with different characters
+        if (name.charAt(0) != typed.charAt(0))
+            return false;
 
-                // updating scanning index
-                numsScanner++;
+        while (nameIndexScanner < name.length() && typedIndexScanner < typed.length()) {
+            // the current character in name and typed string are equal, we increase both indexes;
+            if (name.charAt(nameIndexScanner) == typed.charAt(typedIndexScanner)) {
+                nameIndexScanner++;
+                typedIndexScanner++;
             }
-            // currently at even idx which has odd number
-            else if(numsScanner % 2 == 0){
-                swap(nums, numsScanner, nextOddIndex);
-                nextOddIndex += 2;
-            }
-            else if(numsScanner % 2 == 1){
-                swap(nums, numsScanner, nextEvenIndex);
-                nextEvenIndex += 2;
+            // current chars are diff, we check if it is a repeated char
+            else {
+                if (typed.charAt(typedIndexScanner) != typed.charAt(typedIndexScanner - 1))
+                    return false;
+
+                //skipping all the long pressed characters
+                while (typedIndexScanner < typed.length() && typed.charAt(typedIndexScanner) == typed.charAt(typedIndexScanner - 1))
+                    typedIndexScanner++;
             }
         }
 
-        return nums;
-    }
+        // we did not scan all name characters
+        if(nameIndexScanner < name.length())
+            return false;
 
-    private void swap(int[] nums, int idx1, int idx2){
-        int tmp=nums[idx1];
-        nums[idx1] = nums[idx2];
-        nums[idx2] = tmp;
+        // checking if typed string scan is over
+        while (typedIndexScanner < typed.length()) {
+            if (typed.charAt(typedIndexScanner) != name.charAt(nameIndexScanner - 1))
+                return false;
+
+            typedIndexScanner++;
+        }
+
+        return true;
     }
 }

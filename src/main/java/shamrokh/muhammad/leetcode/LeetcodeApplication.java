@@ -8,7 +8,7 @@ import shamrokh.muhammad.leetcode.solution.Solution;
 public class LeetcodeApplication {
 	public static void main(String[] args) {
 		//SpringApplication.run(LeetcodeApplication.class, args);
-		new Solution().sortArrayByParityII(new int[]{4,1,1,0,1,0});
+		new Solution().isLongPressedName("kikcxmvzi", "kiikcxxmmvvzz");
 	}
 
 }
