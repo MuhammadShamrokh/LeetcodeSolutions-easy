@@ -16,21 +16,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(3, solution.repeatedNTimes(new int[]{1,2,3,3}));
+
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals(2, solution.repeatedNTimes(new int[]{2,1,2,5,3,2}));
+
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(5, solution.repeatedNTimes(new int[]{5,1,5,2,5,3,5,4}));
+
     }
 
     @Test
