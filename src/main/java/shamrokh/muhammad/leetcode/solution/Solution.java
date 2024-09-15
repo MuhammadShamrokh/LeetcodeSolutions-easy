@@ -1,23 +1,38 @@
 package shamrokh.muhammad.leetcode.solution;
 
-class Solution {
-    public int minDeletionSize(String[] strs) {
-        int numOfStrings = strs.length;
-        int stringsLength = strs[0].length();
-        int columnsToDelete = 0;
+import java.util.HashMap;
+import java.util.Map;
 
-        // iterating over all columns
-        for (int j = 0; j < stringsLength; j++) {
-            for (int i = 0; i < numOfStrings - 1; i++) {
-                // checking if this is unordered column
-                if (strs[i].charAt(j) > strs[i + 1].charAt(j)) {
-                    columnsToDelete++;
-                    break;
-                }
-            }
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+        Map<Character,Integer> dictionaryCharactersOrder = new HashMap<>();
+
+        // storing characters order in a map
+        for(int i=0;i<order.length();i++){
+            dictionaryCharactersOrder.put(order.charAt(i),i);
         }
 
-        return columnsToDelete;
+        // iterating over array to check if all words are in alphabet order
+        for(int i=0;i<words.length - 1;i++){
+            if(!isRightOrderAlpha(dictionaryCharactersOrder, words[i], words[i+1]))
+                return false;
+        }
 
+        return true;
+    }
+
+    private boolean isRightOrderAlpha(Map<Character,Integer> order, String word1, String word2){
+        int scanner =0;
+
+        while(scanner < word1.length() && scanner < word2.length()){
+            int charOneOrder = order.get(word1.charAt(scanner));
+            int charTwoOrder = order.get(word2.charAt(scanner));
+
+            if(charOneOrder == charTwoOrder)
+                scanner++;
+            else return charOneOrder <= charTwoOrder;
+        }
+
+        return scanner == word1.length();
     }
 }
