@@ -16,21 +16,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-
+        assertEquals(1,solution.fib(2));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-
+        assertEquals(2,solution.fib(3));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        assertEquals(3,solution.fib(4));
     }
 
     @Test

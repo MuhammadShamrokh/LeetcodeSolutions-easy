@@ -4,20 +4,18 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 
 
 class Solution {
-    public boolean isUnivalTree(TreeNode root) {
-        if(root==null)
-            return true;
+    public int fib(int n) {
+        if(n==0)
+            return 0;
+        if(n==1)
+            return 1;
 
-        if(root.left != null && root.right != null)
-            return root.val == root.left.val && root.val == root.right.val && isUnivalTree(root.left) && isUnivalTree(root.right) ;
+        int[] fiboNumbers = new int []{0,1};
 
-        if(root.right != null)
-            return root.val == root.right.val && isUnivalTree(root.right) ;
+        for(int i=2;i<=n;i++) {
+            fiboNumbers[i%2] = fiboNumbers[0] + fiboNumbers[1];
+        }
 
-        if(root.left != null)
-            return root.val == root.left.val && isUnivalTree(root.left);
-
-        // a leaf
-        return true;
+        return fiboNumbers[n%2];
     }
 }
