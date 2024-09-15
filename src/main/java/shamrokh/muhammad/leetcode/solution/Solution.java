@@ -1,38 +1,23 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.HashMap;
-import java.util.Map;
+import shamrokh.muhammad.leetcode.datastructure.TreeNode;
+
 
 class Solution {
-    public boolean isAlienSorted(String[] words, String order) {
-        Map<Character,Integer> dictionaryCharactersOrder = new HashMap<>();
+    public boolean isUnivalTree(TreeNode root) {
+        if(root==null)
+            return true;
 
-        // storing characters order in a map
-        for(int i=0;i<order.length();i++){
-            dictionaryCharactersOrder.put(order.charAt(i),i);
-        }
+        if(root.left != null && root.right != null)
+            return root.val == root.left.val && root.val == root.right.val && isUnivalTree(root.left) && isUnivalTree(root.right) ;
 
-        // iterating over array to check if all words are in alphabet order
-        for(int i=0;i<words.length - 1;i++){
-            if(!isRightOrderAlpha(dictionaryCharactersOrder, words[i], words[i+1]))
-                return false;
-        }
+        if(root.right != null)
+            return root.val == root.right.val && isUnivalTree(root.right) ;
 
+        if(root.left != null)
+            return root.val == root.left.val && isUnivalTree(root.left);
+
+        // a leaf
         return true;
-    }
-
-    private boolean isRightOrderAlpha(Map<Character,Integer> order, String word1, String word2){
-        int scanner =0;
-
-        while(scanner < word1.length() && scanner < word2.length()){
-            int charOneOrder = order.get(word1.charAt(scanner));
-            int charTwoOrder = order.get(word2.charAt(scanner));
-
-            if(charOneOrder == charTwoOrder)
-                scanner++;
-            else return charOneOrder <= charTwoOrder;
-        }
-
-        return scanner == word1.length();
     }
 }
