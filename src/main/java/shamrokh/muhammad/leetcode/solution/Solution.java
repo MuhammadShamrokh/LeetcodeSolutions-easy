@@ -3,20 +3,44 @@ package shamrokh.muhammad.leetcode.solution;
 import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 
 import java.util.Arrays;
-
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 class Solution {
-    public int largestPerimeter(int[] nums) {
-        // sorting array for efficient angles search
-        Arrays.sort(nums);
+    public int[] sortedSquares(int[] nums) {
+        int lowScanner =0;
+        int highScanner = nums.length -1;
+        int[] result = new int[nums.length];
+        int index = 0;
 
-        // iterating over every three values to check if they are valid triangle angles
-        // scanning from high to low values to find the highest triangle perimeter
-        for(int i=nums.length - 3; i>=0;i--){
-            if(nums[i] + nums[i+1] > nums[i+2])
-                return nums[i] + nums[i+1] + nums[i+2];
+        while(highScanner >= lowScanner){
+            int lowScannerSquare = (int)Math.pow(nums[lowScanner],2);
+            int highScannerSquare = (int)Math.pow(nums[highScanner], 2);
+
+            if(lowScannerSquare < highScannerSquare){
+                result[index] = highScannerSquare;
+                highScanner--;
+            }
+            else{
+                result[index] = lowScannerSquare;
+                lowScanner++;
+            }
+
+            index++;
         }
 
-        return 0;
+        return reverseArray(result);
+    }
+
+    private int[] reverseArray(int[] arr){
+        int length = arr.length;
+        int[] reversedArray = new int[length];
+
+        for(int i=length-1;i>=0;i--){
+            reversedArray[length - 1 - i] = arr[i];
+        }
+
+        return reversedArray;
     }
 }
