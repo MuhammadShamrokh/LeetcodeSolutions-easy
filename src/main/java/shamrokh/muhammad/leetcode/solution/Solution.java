@@ -1,46 +1,45 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 class Solution {
-    public int[] sortedSquares(int[] nums) {
-        int lowScanner =0;
-        int highScanner = nums.length -1;
-        int[] result = new int[nums.length];
-        int index = 0;
+    public List<Integer> addToArrayForm(int[] num, int k) {
+        LinkedList<Integer> result = new LinkedList<>();
+        int carry = 0;
 
-        while(highScanner >= lowScanner){
-            int lowScannerSquare = (int)Math.pow(nums[lowScanner],2);
-            int highScannerSquare = (int)Math.pow(nums[highScanner], 2);
+        for(int i=num.length - 1;i>=0;i--){
+            // extracting current digit in k
+            int kDigit = k % 10;
+            // executing the sum operation
+            int sum = kDigit + num[i] + carry;
 
-            if(lowScannerSquare < highScannerSquare){
-                result[index] = highScannerSquare;
-                highScanner--;
-            }
-            else{
-                result[index] = lowScannerSquare;
-                lowScanner++;
-            }
-
-            index++;
+            // adding the least significant digit to result
+            result.addFirst(sum%10);
+            // adding the bigger digit to carry
+            carry = sum/10;
+            // moving to next digit in k
+            k=k/10;
         }
 
-        return reverseArray(result);
-    }
-
-    private int[] reverseArray(int[] arr){
-        int length = arr.length;
-        int[] reversedArray = new int[length];
-
-        for(int i=length-1;i>=0;i--){
-            reversedArray[length - 1 - i] = arr[i];
+        // iterate over last k digits (in-case k bigger than num)
+        while(k > 0){
+            int kDigit = k % 10;
+            // executing the sum operation
+            int sum = kDigit + carry;
+            // adding the least significant digit to result
+            result.addFirst(sum%10);
+            // adding the bigger digit to carry
+            carry = sum/10;
+            // moving to next digit in k
+            k=k/10;
         }
 
-        return reversedArray;
+        if(carry == 1) {
+            result.addFirst(carry);
+        }
+
+        return result;
     }
 }
