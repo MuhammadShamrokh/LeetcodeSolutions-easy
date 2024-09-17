@@ -16,21 +16,22 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(1,solution.fib(2));
+        assertEquals(5, solution.largestPerimeter(new int[]{2,1,2}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals(2,solution.fib(3));
+        assertEquals(0, solution.largestPerimeter(new int[]{1,2,1,10}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(3,solution.fib(4));
+        assertEquals(10, solution.largestPerimeter(new int[]{3,2,3,4}));
+
     }
 
     @Test

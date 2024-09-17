@@ -2,20 +2,21 @@ package shamrokh.muhammad.leetcode.solution;
 
 import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 
+import java.util.Arrays;
+
 
 class Solution {
-    public int fib(int n) {
-        if(n==0)
-            return 0;
-        if(n==1)
-            return 1;
+    public int largestPerimeter(int[] nums) {
+        // sorting array for efficient angles search
+        Arrays.sort(nums);
 
-        int[] fiboNumbers = new int []{0,1};
-
-        for(int i=2;i<=n;i++) {
-            fiboNumbers[i%2] = fiboNumbers[0] + fiboNumbers[1];
+        // iterating over every three values to check if they are valid triangle angles
+        // scanning from high to low values to find the highest triangle perimeter
+        for(int i=nums.length - 3; i>=0;i--){
+            if(nums[i] + nums[i+1] > nums[i+2])
+                return nums[i] + nums[i+1] + nums[i+2];
         }
 
-        return fiboNumbers[n%2];
+        return 0;
     }
 }
