@@ -1,45 +1,42 @@
 package shamrokh.muhammad.leetcode.solution;
 
+import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
-    public List<Integer> addToArrayForm(int[] num, int k) {
-        LinkedList<Integer> result = new LinkedList<>();
-        int carry = 0;
+    private class Pair{
+        int depth;
+        int parent;
 
-        for(int i=num.length - 1;i>=0;i--){
-            // extracting current digit in k
-            int kDigit = k % 10;
-            // executing the sum operation
-            int sum = kDigit + num[i] + carry;
+        public Pair(int depth, int parent) {
+            this.depth = depth;
+            this.parent = parent;
+        }
+    }
+    public boolean isCousins(TreeNode root, int x, int y) {
+        List<Pair> nodesInformation = new ArrayList<>(2);
 
-            // adding the least significant digit to result
-            result.addFirst(sum%10);
-            // adding the bigger digit to carry
-            carry = sum/10;
-            // moving to next digit in k
-            k=k/10;
+        findNodesDetailsRecursive(root, x, y, nodesInformation, root, 0);
+
+        return nodesInformation.get(0).depth == nodesInformation.get(1).depth
+                && nodesInformation.get(0).parent != nodesInformation.get(1).parent;
+    }
+
+    private void findNodesDetailsRecursive(TreeNode root, int x, int y, List<Pair> nodesInformation, TreeNode parent, int depth) {
+        if(root == null)
+            return;
+
+        // x and y nodes were already found, we stop the recursive function
+        if(nodesInformation.size() == 2)
+            return;
+
+        if(root.val == x || root.val == y){
+            nodesInformation.add(new Pair(depth, parent.val));
         }
 
-        // iterate over last k digits (in-case k bigger than num)
-        while(k > 0){
-            int kDigit = k % 10;
-            // executing the sum operation
-            int sum = kDigit + carry;
-            // adding the least significant digit to result
-            result.addFirst(sum%10);
-            // adding the bigger digit to carry
-            carry = sum/10;
-            // moving to next digit in k
-            k=k/10;
-        }
-
-        if(carry == 1) {
-            result.addFirst(carry);
-        }
-
-        return result;
+        findNodesDetailsRecursive(root.left, x, y, nodesInformation, root, depth+1);
+        findNodesDetailsRecursive(root.right, x, y, nodesInformation, root, depth+1);
     }
 }
