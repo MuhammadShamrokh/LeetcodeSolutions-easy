@@ -16,7 +16,6 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(3, solution.findJudge(3, new int[][]{{1,3},{2,3}}));
     }
 
     @Test

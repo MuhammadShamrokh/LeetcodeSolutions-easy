@@ -4,29 +4,61 @@ import shamrokh.muhammad.leetcode.datastructure.TreeNode;
 
 import java.util.*;
 
-class Solution {
-    public int findJudge(int n, int[][] trust) {
-        int[] trustingCounter = new int[n];
-        int[] trustedByCounter = new int[n];
+public class Solution {
+    public int numRookCaptures(char[][] board) {
+        int rookRow = -1, rookCol = -1;
 
-        // for each person,
-        // we count the amount of people he trusts
-        // and the amount of people he is trusted by
-        for(int i=0;i<trust.length;i++){
-            trustingCounter[trust[i][0] - 1]++;
-            trustedByCounter[trust[i][1] - 1]++;
+        // Step 1: Find the position of the rook
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j] == 'R') {
+                    rookRow = i;
+                    rookCol = j;
+                    break;
+                }
+            }
+            if (rookRow != -1) break; // We found the rook, no need to continue
         }
 
-        // iterating over all people counters
-        for(int i=0;i<n;i++){
-            // checking if the person is trusted by n-1
-            if(trustedByCounter[i] == n-1)
-                // checking if the person trust nobody
-                if(trustingCounter[i] == 0)
-                    return i + 1;
+        // Step 2: Count pawns attacked by rook
+        int pawnCount = 0;
+
+        // Check upwards
+        for (int i = rookRow - 1; i >= 0; i--) {
+            if (board[i][rookCol] == 'B') break; // Blocked by a bishop
+            if (board[i][rookCol] == 'p') {
+                pawnCount++;
+                break; // Stop after capturing a pawn
+            }
         }
 
-        // we did not find any town judge
-        return -1;
+        // Check downwards
+        for (int i = rookRow + 1; i < 8; i++) {
+            if (board[i][rookCol] == 'B') break; // Blocked by a bishop
+            if (board[i][rookCol] == 'p') {
+                pawnCount++;
+                break; // Stop after capturing a pawn
+            }
+        }
+
+        // Check leftwards
+        for (int j = rookCol - 1; j >= 0; j--) {
+            if (board[rookRow][j] == 'B') break; // Blocked by a bishop
+            if (board[rookRow][j] == 'p') {
+                pawnCount++;
+                break; // Stop after capturing a pawn
+            }
+        }
+
+        // Check rightwards
+        for (int j = rookCol + 1; j < 8; j++) {
+            if (board[rookRow][j] == 'B') break; // Blocked by a bishop
+            if (board[rookRow][j] == 'p') {
+                pawnCount++;
+                break; // Stop after capturing a pawn
+            }
+        }
+
+        return pawnCount; // Return total number of pawns that can be captured
     }
 }
