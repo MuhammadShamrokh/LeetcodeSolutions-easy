@@ -3,42 +3,37 @@ package shamrokh.muhammad.leetcode.solution;
 import java.util.*;
 
 class Solution {
-    private final int ALPHABET_LETTERS_AMOUNT = 26;
+    public int largestSumAfterKNegations(int[] nums, int k) {
+        Arrays.sort(nums);
+        int scanner = 0;
 
-    public List<String> commonChars(String[] words) {
-        int length = words.length;
-        // init an array of counters arrays
-        int[][] wordsLettersCountArray = new int[length][ALPHABET_LETTERS_AMOUNT];
-        List<String> result = new LinkedList<>();
-
-        // counting letter appearances in each word
-        for(int w=0;w<length;w++){
-            String currentWord = words[w];
-            for(int c=0;c<currentWord.length();c++){
-                wordsLettersCountArray[w][currentWord.charAt(c)-'a']++;
-            }
+        // converting negative numbers (if exists) into positive
+        while(scanner < nums.length && nums[scanner] <0 && k > 0){
+            nums[scanner] *= -1;
+            scanner++;
+            k--;
         }
 
-        // inserting min appearances of each letter in the result list
-        for (int l = 0; l < ALPHABET_LETTERS_AMOUNT; l++) {
-            int minLetterAppearances = getMinValueInColumn(wordsLettersCountArray, l);
-            char currentChar = (char)('a' + l);
-
-            for(int a=0;a<minLetterAppearances;a++){
-                result.add(Character.toString(currentChar));
-            }
+        // if k is odd, we multiply the smallest number by -1 (scanner has the index of the smallest number)
+        if(k%2 == 1) {
+            int index = findLowestValueIndex(nums);
+            nums[index] *= -1;
         }
 
-        return result;
+        return Arrays.stream(nums).sum();
     }
 
-    private int getMinValueInColumn(int[][] counters, int columnNum){
-        int min = Integer.MAX_VALUE;
+    private int findLowestValueIndex(int[] nums) {
+        int min = nums[0];
+        int index = 0;
 
-        for(int i=0;i< counters.length;i++){
-            min = Math.min(min, counters[i][columnNum]);
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]<min){
+                index = i;
+                min = nums[i];
+            }
         }
 
-        return min;
+        return index;
     }
 }
