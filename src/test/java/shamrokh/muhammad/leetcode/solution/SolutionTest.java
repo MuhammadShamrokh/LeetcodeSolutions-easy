@@ -16,21 +16,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(5, solution.largestSumAfterKNegations(new int[]{4,2,3}, 1));
+        assertEquals(2,solution.bitwiseComplement(5));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals(6, solution.largestSumAfterKNegations(new int[]{3,-1,0,2}, 3));
+        assertEquals(0,solution.bitwiseComplement(7));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(13, solution.largestSumAfterKNegations(new int[]{2,-3,-1,5,-4}, 2));
+        assertEquals(5,solution.bitwiseComplement(10));
     }
 
     @Test
