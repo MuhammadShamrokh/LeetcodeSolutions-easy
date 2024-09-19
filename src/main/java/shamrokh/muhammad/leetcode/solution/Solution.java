@@ -1,64 +1,44 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import shamrokh.muhammad.leetcode.datastructure.TreeNode;
-
 import java.util.*;
 
-public class Solution {
-    public int numRookCaptures(char[][] board) {
-        int rookRow = -1, rookCol = -1;
+class Solution {
+    private final int ALPHABET_LETTERS_AMOUNT = 26;
 
-        // Step 1: Find the position of the rook
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (board[i][j] == 'R') {
-                    rookRow = i;
-                    rookCol = j;
-                    break;
-                }
-            }
-            if (rookRow != -1) break; // We found the rook, no need to continue
-        }
+    public List<String> commonChars(String[] words) {
+        int length = words.length;
+        // init an array of counters arrays
+        int[][] wordsLettersCountArray = new int[length][ALPHABET_LETTERS_AMOUNT];
+        List<String> result = new LinkedList<>();
 
-        // Step 2: Count pawns attacked by rook
-        int pawnCount = 0;
-
-        // Check upwards
-        for (int i = rookRow - 1; i >= 0; i--) {
-            if (board[i][rookCol] == 'B') break; // Blocked by a bishop
-            if (board[i][rookCol] == 'p') {
-                pawnCount++;
-                break; // Stop after capturing a pawn
+        // counting letter appearances in each word
+        for(int w=0;w<length;w++){
+            String currentWord = words[w];
+            for(int c=0;c<currentWord.length();c++){
+                wordsLettersCountArray[w][currentWord.charAt(c)-'a']++;
             }
         }
 
-        // Check downwards
-        for (int i = rookRow + 1; i < 8; i++) {
-            if (board[i][rookCol] == 'B') break; // Blocked by a bishop
-            if (board[i][rookCol] == 'p') {
-                pawnCount++;
-                break; // Stop after capturing a pawn
+        // inserting min appearances of each letter in the result list
+        for (int l = 0; l < ALPHABET_LETTERS_AMOUNT; l++) {
+            int minLetterAppearances = getMinValueInColumn(wordsLettersCountArray, l);
+            char currentChar = (char)('a' + l);
+
+            for(int a=0;a<minLetterAppearances;a++){
+                result.add(Character.toString(currentChar));
             }
         }
 
-        // Check leftwards
-        for (int j = rookCol - 1; j >= 0; j--) {
-            if (board[rookRow][j] == 'B') break; // Blocked by a bishop
-            if (board[rookRow][j] == 'p') {
-                pawnCount++;
-                break; // Stop after capturing a pawn
-            }
+        return result;
+    }
+
+    private int getMinValueInColumn(int[][] counters, int columnNum){
+        int min = Integer.MAX_VALUE;
+
+        for(int i=0;i< counters.length;i++){
+            min = Math.min(min, counters[i][columnNum]);
         }
 
-        // Check rightwards
-        for (int j = rookCol + 1; j < 8; j++) {
-            if (board[rookRow][j] == 'B') break; // Blocked by a bishop
-            if (board[rookRow][j] == 'p') {
-                pawnCount++;
-                break; // Stop after capturing a pawn
-            }
-        }
-
-        return pawnCount; // Return total number of pawns that can be captured
+        return min;
     }
 }
