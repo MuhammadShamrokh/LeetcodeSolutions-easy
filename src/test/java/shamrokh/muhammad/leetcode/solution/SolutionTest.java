@@ -16,21 +16,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(2,solution.bitwiseComplement(5));
+        assertTrue(solution.canThreePartsEqualSum(new int[]{0,2,1,-6,6,-7,9,1,2,0,1}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals(0,solution.bitwiseComplement(7));
+        assertFalse(solution.canThreePartsEqualSum(new int[]{0,2,1,-6,6,7,9,-1,2,0,1}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(5,solution.bitwiseComplement(10));
+        assertTrue(solution.canThreePartsEqualSum(new int[]{3,3,6,5,-2,2,5,1,-9,4}));
     }
 
     @Test
