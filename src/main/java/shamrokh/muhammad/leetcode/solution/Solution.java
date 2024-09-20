@@ -4,20 +4,27 @@ package shamrokh.muhammad.leetcode.solution;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution {
-    public List<Boolean> prefixesDivBy5(int[] nums) {
-        List<Boolean> result = new ArrayList<>();
-        int remainder = 0; // To track the remainder of the number mod 5
+class Solution {
+    public String removeOuterParentheses(String s) {
+        StringBuilder sb = new StringBuilder();
+        int determineValidParenthesesCounter = 0;
 
-        // Iterate through each bit in the binary array
-        for (int num : nums) {
-            // Update the number (remainder) by shifting it left and adding the current bit
-            remainder = (remainder * 2 + num) % 5;
+        for(int i=0;i<s.length();i++){
+            char currentChar = s.charAt(i);
+            // opening parentheses of a valid sub parentheses
+            if(currentChar == '('){
+                if(determineValidParenthesesCounter !=0)
+                    sb.append(currentChar);
 
-            // If the remainder is 0, the number is divisible by 5
-            result.add(remainder == 0);
+                determineValidParenthesesCounter++;
+            }else{
+                if(determineValidParenthesesCounter != 1)
+                    sb.append(currentChar);
+
+                determineValidParenthesesCounter--;
+            }
         }
 
-        return result;
+        return sb.toString();
     }
 }
