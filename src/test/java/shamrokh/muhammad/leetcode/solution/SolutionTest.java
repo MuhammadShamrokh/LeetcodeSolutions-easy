@@ -17,14 +17,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-
+        assertEquals(6, solution.countCharacters(new String[]{"cat","bt","hat","tree"}, "atach"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-
+        assertEquals(10, solution.countCharacters(new String[]{"hello","world","leetcode"}, "welldonehoneyr"));
     }
 
     @Test
