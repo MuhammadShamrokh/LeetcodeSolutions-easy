@@ -17,21 +17,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals("ca", solution.removeDuplicates("abbaca"));
+        assertEquals(3, solution.heightChecker(new int[]{1,1,4,2,1,3}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals("ay", solution.removeDuplicates("azxxzy"));
+        assertEquals(5, solution.heightChecker(new int[]{5,1,2,3,4}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        assertEquals(0, solution.heightChecker(new int[]{1,2,3,4,5}));
     }
 
     @Test
