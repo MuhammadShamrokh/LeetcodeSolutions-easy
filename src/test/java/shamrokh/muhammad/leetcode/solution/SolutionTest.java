@@ -17,28 +17,28 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertTrue(solution.isBoomerang(new int[][]{{1,1},{2,3},{3,2}}));
+        assertEquals(1, solution.lastStoneWeight(new int[]{2,7,4,1,8,1}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertFalse(solution.isBoomerang(new int[][]{{1,1},{2,2},{3,3}}));
+        assertEquals(1, solution.lastStoneWeight(new int[]{1}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertTrue(solution.isBoomerang(new int[][]{{0,1},{1,1},{2,2}}));
+        assertEquals(0, solution.lastStoneWeight(new int[]{2, 2}));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-        assertFalse(solution.isBoomerang(new int[][]{{0,0},{2,1},{2,1}}));
+
     }
 
 }
