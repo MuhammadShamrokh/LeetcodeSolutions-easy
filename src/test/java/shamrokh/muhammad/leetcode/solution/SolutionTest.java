@@ -17,27 +17,28 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(6, solution.countCharacters(new String[]{"cat","bt","hat","tree"}, "atach"));
+        assertTrue(solution.isBoomerang(new int[][]{{1,1},{2,3},{3,2}}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals(10, solution.countCharacters(new String[]{"hello","world","leetcode"}, "welldonehoneyr"));
+        assertFalse(solution.isBoomerang(new int[][]{{1,1},{2,2},{3,3}}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
+        assertTrue(solution.isBoomerang(new int[][]{{0,1},{1,1},{2,2}}));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-
+        assertFalse(solution.isBoomerang(new int[][]{{0,0},{2,1},{2,1}}));
     }
 
 }
