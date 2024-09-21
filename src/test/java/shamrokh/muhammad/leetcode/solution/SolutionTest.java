@@ -17,21 +17,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(1, solution.lastStoneWeight(new int[]{2,7,4,1,8,1}));
+        assertEquals("ca", solution.removeDuplicates("abbaca"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals(1, solution.lastStoneWeight(new int[]{1}));
+        assertEquals("ay", solution.removeDuplicates("azxxzy"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(0, solution.lastStoneWeight(new int[]{2, 2}));
+
     }
 
     @Test

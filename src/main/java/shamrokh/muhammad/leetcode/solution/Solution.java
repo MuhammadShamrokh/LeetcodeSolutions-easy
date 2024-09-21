@@ -3,26 +3,27 @@ package shamrokh.muhammad.leetcode.solution;
 import java.util.*;
 
 class Solution {
-    public int lastStoneWeight(int[] stones) {
-        //edge case, received 1 stone
-        if(stones.length == 1)
-            return stones[0];
+    public String removeDuplicates(String s) {
+        // Step 1: Create a stack to store the characters
+        Stack<Character> stack = new Stack<>();
 
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
-
-        // filling stones in priority queue
-        for(int stone:stones){
-            maxHeap.add(stone);
+        // Step 2: Traverse the string character by character
+        for (char c : s.toCharArray()) {
+            // If the stack is not empty and the top element is equal to the current character
+            if (!stack.isEmpty() && stack.peek() == c) {
+                stack.pop(); // Remove the top element (i.e., remove the duplicate)
+            } else {
+                stack.push(c); // Otherwise, push the current character to the stack
+            }
         }
 
-        while(maxHeap.size() > 1){
-            int firstStone = maxHeap.poll();
-            int secondStone = maxHeap.poll();
-
-            if(firstStone != secondStone)
-                maxHeap.add(firstStone-secondStone);
+        // Step 3: Build the result string from the stack
+        StringBuilder result = new StringBuilder();
+        // foreach loop scans the stack from bottom to top! (not LIFO)
+        for (char c : stack) {
+            result.append(c);
         }
 
-        return maxHeap.isEmpty()? 0:maxHeap.poll();
+        return result.toString();
     }
 }
