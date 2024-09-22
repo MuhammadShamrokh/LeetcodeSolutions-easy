@@ -5,28 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
-    public String[] findOcurrences(String text, String first, String second) {
-        String[] textWords = text.split(" ");
-        List<String> result = new ArrayList<>();
+    public void duplicateZeros(int[] arr) {
+        int arrayLength = arr.length;
+        int[] result = new int[arrayLength];
+        int reader = 0;
+        int writer = 0;
 
-        if(textWords.length < 3)
-            return new String[]{};
+        while(writer < arrayLength){
+            result[writer] = arr[reader];
 
-        for(int i=0;i< textWords.length-2;i++){
-            if(textWords[i].equals(first)) {
-                if (textWords[i + 1].equals(second)) {
-                    result.add(textWords[i+2]);
-                }
+            if(arr[reader] == 0){
+                writer++;
+                if(writer < arrayLength)
+                    result[writer] = 0;
             }
+
+            reader++;
+            writer++;
         }
 
-        String[] resultArray = new String[result.size()];
-
-        for(int i=0;i< result.size();i++){
-            resultArray[i] = result.get(i);
+        for(int i=0;i<arrayLength;i++){
+            arr[i] = result[i];
         }
-
-        return resultArray;
     }
-
 }
