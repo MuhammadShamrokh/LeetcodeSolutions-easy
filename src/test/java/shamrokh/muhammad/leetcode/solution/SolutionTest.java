@@ -17,21 +17,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(3, solution.heightChecker(new int[]{1,1,4,2,1,3}));
+        assertEquals("ABC", solution.gcdOfStrings("ABCABC", "ABC"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals(5, solution.heightChecker(new int[]{5,1,2,3,4}));
+        assertEquals("AB",solution.gcdOfStrings("ABABAB", "ABAB"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(0, solution.heightChecker(new int[]{1,2,3,4,5}));
+        assertEquals("", solution.gcdOfStrings("LEET", "CODE"));
     }
 
     @Test

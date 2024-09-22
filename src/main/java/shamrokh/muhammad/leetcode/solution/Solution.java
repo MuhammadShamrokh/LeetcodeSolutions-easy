@@ -1,20 +1,25 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.*;
 
 class Solution {
-    public int heightChecker(int[] heights) {
-        int[] expected = heights.clone();
-        int resultCount = 0;
-
-        // sorting array to get the "expected array"
-        Arrays.sort(expected);
-        // iterating over arrays to calculate different indexes elements
-        for(int i=0;i<heights.length;i++){
-            if(expected[i] != heights[i])
-                resultCount++;
+    public String gcdOfStrings(String str1, String str2) {
+        // condition to check if both strings have same repeating pattern
+        if(!(str1 + str2).equals(str2 + str1)){
+            return "";
         }
 
-        return resultCount;
+        // calculating the greater divisor length
+        // (the longest repeating substring pattern)
+        int greaterCommonDivisorLength = calculateGreaterCommonDivisor(str1.length(), str2.length());
+
+        return str1.substring(0, greaterCommonDivisorLength);
+    }
+
+    private int calculateGreaterCommonDivisor(int a, int b){
+        if(b==0){
+            return a;
+        }
+
+        return calculateGreaterCommonDivisor(b, a%b);
     }
 }
