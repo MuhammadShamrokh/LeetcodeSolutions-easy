@@ -17,21 +17,20 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals("ABC", solution.gcdOfStrings("ABCABC", "ABC"));
+        assertArrayEquals(new String[]{"girl", "student"}, solution.findOcurrences( "alice is a good girl she is a good student", "a", "good"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals("AB",solution.gcdOfStrings("ABABAB", "ABAB"));
+        assertArrayEquals(new String[]{"we","rock"}, solution.findOcurrences("we will we will rock you", "we", "will"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals("", solution.gcdOfStrings("LEET", "CODE"));
     }
 
     @Test

@@ -1,25 +1,32 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
-    public String gcdOfStrings(String str1, String str2) {
-        // condition to check if both strings have same repeating pattern
-        if(!(str1 + str2).equals(str2 + str1)){
-            return "";
+    public String[] findOcurrences(String text, String first, String second) {
+        String[] textWords = text.split(" ");
+        List<String> result = new ArrayList<>();
+
+        if(textWords.length < 3)
+            return new String[]{};
+
+        for(int i=0;i< textWords.length-2;i++){
+            if(textWords[i].equals(first)) {
+                if (textWords[i + 1].equals(second)) {
+                    result.add(textWords[i+2]);
+                }
+            }
         }
 
-        // calculating the greater divisor length
-        // (the longest repeating substring pattern)
-        int greaterCommonDivisorLength = calculateGreaterCommonDivisor(str1.length(), str2.length());
+        String[] resultArray = new String[result.size()];
 
-        return str1.substring(0, greaterCommonDivisorLength);
-    }
-
-    private int calculateGreaterCommonDivisor(int a, int b){
-        if(b==0){
-            return a;
+        for(int i=0;i< result.size();i++){
+            resultArray[i] = result.get(i);
         }
 
-        return calculateGreaterCommonDivisor(b, a%b);
+        return resultArray;
     }
+
 }
