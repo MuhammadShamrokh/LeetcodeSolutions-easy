@@ -17,18 +17,25 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
+        int[] expected = new int[]{1,2,3,1};
+
+        assertArrayEquals(expected, solution.distributeCandies(7,4));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
+        int[] expected = new int[]{5,2,3};
+
+        assertArrayEquals(expected, solution.distributeCandies(10,3));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
+
     }
 
     @Test
