@@ -17,32 +17,36 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        int[] expected = new int[]{1,2,3,1};
+        String expected = "1[.]1[.]1[.]1";
 
-        assertArrayEquals(expected, solution.distributeCandies(7,4));
+        assertEquals(expected, solution.defangIPaddr("1.1.1.1"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        int[] expected = new int[]{5,2,3};
+        String expected = "255[.]100[.]50[.]0";
 
-        assertArrayEquals(expected, solution.distributeCandies(10,3));
+        assertEquals(expected, solution.defangIPaddr("255.100.50.0"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
+        String expected = "10[.]0[.]0[.]1";
 
+        assertEquals(expected, solution.defangIPaddr("10.0.0.1"));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
+        String expected = "195[.]7[.]6[.]4";
 
+        assertEquals(expected, solution.defangIPaddr("195.7.6.4"));
     }
 
 }

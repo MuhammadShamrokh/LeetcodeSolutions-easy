@@ -2,26 +2,19 @@ package shamrokh.muhammad.leetcode.solution;
 
 
 class Solution {
-    public int[] distributeCandies(int candies, int num_people) {
-        int[] distributedCandies = new int [num_people];
-        int candiesSeparatingIndex = 0;
-        int candiesToGive = 1;
+    public String defangIPaddr(String address) {
+        StringBuilder sb = new StringBuilder();
 
-        while(candies > 0){
-            if(candiesToGive >= candies)
-            {
-                distributedCandies[candiesSeparatingIndex] += candies;
-                candies = 0;
-            }
-            else{
-                distributedCandies[candiesSeparatingIndex] += candiesToGive;
-                candies -= candiesToGive;
-            }
+        for(int i=0;i<address.length();i++){
+            char currentChar = address.charAt(i);
 
-            candiesToGive++;
-            candiesSeparatingIndex = (candiesSeparatingIndex+1)%num_people;
+            if(currentChar == '.'){
+                sb.append("[.]");
+            }
+            else
+                sb.append(currentChar);
         }
 
-        return distributedCandies;
+        return sb.toString();
     }
 }
