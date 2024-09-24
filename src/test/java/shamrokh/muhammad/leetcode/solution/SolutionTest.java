@@ -17,36 +17,32 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        String expected = "1[.]1[.]1[.]1";
+        double expected = 2.00000;
 
-        assertEquals(expected, solution.defangIPaddr("1.1.1.1"));
+        assertEquals(expected, solution.trimMean(new int[]{1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        String expected = "255[.]100[.]50[.]0";
+        double expected = 4.00000;
 
-        assertEquals(expected, solution.defangIPaddr("255.100.50.0"));
+        assertEquals(expected, solution.trimMean(new int[]{6,2,7,5,1,2,0,3,10,2,5,0,5,5,0,8,7,6,8,0}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        String expected = "10[.]0[.]0[.]1";
 
-        assertEquals(expected, solution.defangIPaddr("10.0.0.1"));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-        String expected = "195[.]7[.]6[.]4";
 
-        assertEquals(expected, solution.defangIPaddr("195.7.6.4"));
     }
 
 }
