@@ -1,29 +1,41 @@
 package shamrokh.muhammad.leetcode.solution;
 
+
 class Solution {
-    public int findSpecialInteger(int[] arr) {
-        int length = arr.length;
-        double fiftyTwoPercent = length * 0.25;
-        int elementCounter = 0;
-        int currentElement = arr[0];
+    public int numEquivDominoPairs(int[][] dominoes) {
+        // Step 1: Create a frequency map to store normalized dominoes
+        int[] count = new int[100];  // We use an array because a pair [a, b] can be represented as a two-digit number a*10 + b
+        int result = 0;
 
-        // iterating over elements to find element with requirement appearances amount
-        for (int elem : arr) {
-            if (elem == currentElement) {
-                elementCounter++;
-            } else {
-                // new element, checking if the prev element answers the appearances requirements
-                if (elementCounter > fiftyTwoPercent)
-                    return currentElement;
-
-                // the previous element did not appear more than 25% of the array length
-                currentElement = elem;
-                elementCounter = 1;
-            }
+        for (int[] domino : dominoes) {
+            int a = domino[0];
+            int b = domino[1];
+            // Normalize the domino
+            int val = Math.min(a, b) * 10 + Math.max(a, b);  // Convert the domino into a two-digit number
+            result += count[val];  // Add the current count of this domino to the result
+            count[val]++;  // Increment the count of this domino
         }
 
-        // the element did not appear in the middle of the array
-        // the wanted element must be the last element
-        return arr[length-1];
+        return result;
     }
+
+    /*
+    private int nCr(int n, int r)
+    {
+        return fact(n) / (fact(r) *
+                fact(n - r));
+    }
+
+    // Returns factorial of n
+    private int fact(int n)
+    {
+        if(n==0 || n==1)
+            return 1;
+        int res = 1;
+        for (int i = 2; i <= n; i++)
+            res = res * i;
+        return res;
+    }
+
+     */
 }

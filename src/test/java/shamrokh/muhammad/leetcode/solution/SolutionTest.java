@@ -17,14 +17,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(6, solution.findSpecialInteger(new int[]{1,2,2,6,6,6,6,7,10}));
+        assertEquals(1, solution.numEquivDominoPairs(new int[][]{{1,2}, {2,1},{3,4},{5,6}}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo() {
-        assertEquals(1, solution.findSpecialInteger(new int[]{1, 1}));
+        assertEquals(3, solution.numEquivDominoPairs(new int[][]{{1,2},{1,2},{1,1},{1,2},{2,2}}));
     }
 
     @Test
