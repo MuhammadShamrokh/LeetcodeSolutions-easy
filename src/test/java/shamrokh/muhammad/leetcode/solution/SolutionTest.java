@@ -17,18 +17,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        int[] expected = new int[]{18,6,6,6,1,-1};
-
-        assertArrayEquals(expected,solution.replaceElements(new int[]{17,18,5,4,6,1}));
+        assertEquals(4,solution.tribonacci(4));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        int[] expected = new int[]{-1};
-
-        assertArrayEquals(expected,solution.replaceElements(new int[]{400}));
+        assertEquals(1389537, solution.tribonacci(25));
     }
 
     @Test

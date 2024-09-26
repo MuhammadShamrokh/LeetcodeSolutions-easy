@@ -1,19 +1,27 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public int[] replaceElements(int[] arr) {
-        int length = arr.length;
-        int[] biggestRightElement = new int[length];
+    public int tribonacci(int n) {
+        // edge cases, n smaller than 3
+        if(n==0)
+            return 0;
+        if(n==1)
+            return 1;
+        if(n==2)
+            return 1;
 
-        // there is no elements to the right of last element in the array
-        biggestRightElement[length - 1] = -1;
+        return calculateTribunacciNumber(n);
+    }
 
-        // scanning array from the right to the left
-        for(int i=length - 2;i>=0;i--){
-            // we store the biggest element we say till now in the current index of result array
-            biggestRightElement[i] = Math.max(arr[i+1],biggestRightElement[i+1]);
+    private int calculateTribunacciNumber(int n) {
+        int[] calculationArray = new int[3];
+        calculationArray[1] = 1;
+        calculationArray[2] = 1;
+
+        for(int i=3;i<=n;i++){
+            calculationArray[i%3] = calculationArray[0] + calculationArray[1] + calculationArray[2];
         }
 
-        return biggestRightElement;
+        return calculationArray[n%3];
     }
 }
