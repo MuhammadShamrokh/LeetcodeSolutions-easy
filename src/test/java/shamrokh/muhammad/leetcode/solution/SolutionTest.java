@@ -17,14 +17,18 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(1, solution.numEquivDominoPairs(new int[][]{{1,2}, {2,1},{3,4},{5,6}}));
+        int[] expected = new int[]{18,6,6,6,1,-1};
+
+        assertArrayEquals(expected,solution.replaceElements(new int[]{17,18,5,4,6,1}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
-    void TestTwo() {
-        assertEquals(3, solution.numEquivDominoPairs(new int[][]{{1,2},{1,2},{1,1},{1,2},{2,2}}));
+    void TestTwo(){
+        int[] expected = new int[]{-1};
+
+        assertArrayEquals(expected,solution.replaceElements(new int[]{400}));
     }
 
     @Test
