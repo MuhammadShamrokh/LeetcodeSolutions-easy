@@ -1,27 +1,24 @@
 package shamrokh.muhammad.leetcode.solution;
 
-class Solution {
-    public int tribonacci(int n) {
-        // edge cases, n smaller than 3
-        if(n==0)
-            return 0;
-        if(n==1)
-            return 1;
-        if(n==2)
-            return 1;
 
-        return calculateTribunacciNumber(n);
-    }
-
-    private int calculateTribunacciNumber(int n) {
-        int[] calculationArray = new int[3];
-        calculationArray[1] = 1;
-        calculationArray[2] = 1;
-
-        for(int i=3;i<=n;i++){
-            calculationArray[i%3] = calculationArray[0] + calculationArray[1] + calculationArray[2];
+public class Solution{
+    public int[] decompressRLElist(int[] nums) {
+        int size = 0;
+        int scanner = 0;
+        // calculating result array size
+        for(int i=0;i< nums.length;i+=2){
+            size+=nums[i];
         }
 
-        return calculationArray[n%3];
+        int[] result = new int[size];
+
+        for(int i=0;i<nums.length;i+=2){
+            for(int j=0;j<nums[i];j++) {
+                result[scanner] = nums[i + 1];
+                scanner++;
+            }
+        }
+
+        return result;
     }
 }

@@ -17,14 +17,15 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(4,solution.tribonacci(4));
+        assertArrayEquals(new int[]{2,4,4,4}, solution.decompressRLElist(new int[]{1,2,3,4}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(1389537, solution.tribonacci(25));
+        assertArrayEquals(new int[]{1,3,3}, solution.decompressRLElist(new int[]{1,1,2,3}));
+
     }
 
     @Test
