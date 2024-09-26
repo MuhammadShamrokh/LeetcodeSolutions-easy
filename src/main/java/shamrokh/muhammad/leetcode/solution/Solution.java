@@ -12,6 +12,7 @@ class Solution {
             int b = domino[1];
             // Normalize the domino
             int val = Math.min(a, b) * 10 + Math.max(a, b);  // Convert the domino into a two-digit number
+            // nC2 = n(n-1)/2 which is the sum of all elements from 1 to n
             result += count[val];  // Add the current count of this domino to the result
             count[val]++;  // Increment the count of this domino
         }
