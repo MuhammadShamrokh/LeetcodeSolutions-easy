@@ -17,21 +17,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(1, solution.canBeTypedWords("hello world","ad"));
+        assertEquals(1, solution.daysBetweenDates("2019-06-29", "2019-06-30"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(1, solution.canBeTypedWords("leet code","lt"));
+        assertEquals(15, solution.daysBetweenDates("2020-01-15", "2019-12-31"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(0, solution.canBeTypedWords("leet code", "e"));
+
     }
 
     @Test
