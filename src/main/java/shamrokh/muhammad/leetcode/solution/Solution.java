@@ -1,35 +1,35 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+public class Solution {
+    public int dayOfYear(String date) {
+        // Step 1: Extract year, month, and day from the input string
+        String[] parts = date.split("-");
+        int year = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        int day = Integer.parseInt(parts[2]);
 
-class Solution {
-    public int[] arrayRankTransform(int[] arr) {
-        // edge case, empty input array
-        if(arr.length == 0)
-            return new int[]{};
+        // Step 2: Define the number of days in each month for a non-leap year
+        int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-        Map<Integer, Integer> elementsRanks = new HashMap<>();
-        int[] result = new int[arr.length];
-        int[] sortedArr = arr.clone();
-        int currentRank = 1;
-
-        // sorting array for easier ranks calculation
-        Arrays.sort(sortedArr);
-        // iterating over element and storing ranks in Ranks map
-        for(int elem:sortedArr){
-            if(!elementsRanks.containsKey(elem)) {
-                elementsRanks.put(elem, currentRank);
-                currentRank++;
-            }
+        // Step 3: Check if the year is a leap year
+        if (isLeapYear(year)) {
+            daysInMonth[1] = 29; // Update February days for leap year
         }
 
-        // building ranks array
-        for(int i=0;i<arr.length;i++){
-            result[i] = elementsRanks.get(arr[i]);
+        // Step 4: Calculate the total number of days
+        int dayOfYear = 0;
+        // Add days of the months preceding the current month
+        for (int i = 0; i < month - 1; i++) {
+            dayOfYear += daysInMonth[i];
         }
+        // Add the current day
+        dayOfYear += day;
 
-        return result;
+        return dayOfYear;
+    }
+
+    // Helper function to check if a year is a leap year
+    private boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
 }

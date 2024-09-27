@@ -17,36 +17,28 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        int[] expected = new int[]{4,1,2,3};
-
-        assertArrayEquals(expected, solution.arrayRankTransform(new int[]{40,10,20,30}));
+        assertEquals(9, solution.dayOfYear("2019-01-09"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        int[] expected = new int[]{1,1,1};
-
-        assertArrayEquals(expected, solution.arrayRankTransform(new int[]{100, 100, 100}));
+        assertEquals(41, solution.dayOfYear("2019-02-10"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        int[] expected = new int[]{};
 
-        assertArrayEquals(expected,solution.arrayRankTransform(new int[]{}));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-        int[] expected = new int[]{1,2,3,4};
 
-        assertArrayEquals(expected,solution.arrayRankTransform(new int[]{1,2,3,4}));
     }
 
 }
