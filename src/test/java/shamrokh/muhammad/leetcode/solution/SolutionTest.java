@@ -17,29 +17,36 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertArrayEquals(new int[]{2,4,4,4}, solution.decompressRLElist(new int[]{1,2,3,4}));
+        int[] expected = new int[]{4,1,2,3};
+
+        assertArrayEquals(expected, solution.arrayRankTransform(new int[]{40,10,20,30}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertArrayEquals(new int[]{1,3,3}, solution.decompressRLElist(new int[]{1,1,2,3}));
+        int[] expected = new int[]{1,1,1};
 
+        assertArrayEquals(expected, solution.arrayRankTransform(new int[]{100, 100, 100}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
+        int[] expected = new int[]{};
 
+        assertArrayEquals(expected,solution.arrayRankTransform(new int[]{}));
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
+        int[] expected = new int[]{1,2,3,4};
 
+        assertArrayEquals(expected,solution.arrayRankTransform(new int[]{1,2,3,4}));
     }
 
 }
