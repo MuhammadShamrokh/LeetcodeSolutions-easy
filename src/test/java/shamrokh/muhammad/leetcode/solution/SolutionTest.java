@@ -17,20 +17,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertFalse(solution.threeConsecutiveOdds(new int[]{2,6,4,1}));
+        assertEquals(1, solution.maxNumberOfBalloons("nlaebolko"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertTrue(solution.threeConsecutiveOdds(new int[]{1,2,34,3,4,5,7,23,12}));
+        assertEquals(2, solution.maxNumberOfBalloons("loonbalxballpoon"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
+        assertEquals(0, solution.maxNumberOfBalloons("leetcode"));
     }
 
     @Test

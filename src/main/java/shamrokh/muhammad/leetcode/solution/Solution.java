@@ -1,29 +1,21 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public boolean threeConsecutiveOdds(int[] arr) {
-        if(arr.length == 1 || arr.length == 2)
-            return false;
-
-        int scanner = 0;
-        int consecutiveOddNumbersCount = 0;
-
-        // scanning arr array to check if there is consecutive 3 odd numbers
-        while(scanner < arr.length){
-            // the current number is odd
-            if(arr[scanner]%2 == 1){
-                consecutiveOddNumbersCount++;
-
-                // checking if we found 3 consecutive odd numbers
-                if(consecutiveOddNumbersCount == 3)
-                    return true;
-            }
-            else { // even number, we reset counter to 0
-                consecutiveOddNumbersCount = 0;
-            }
-
-            scanner++;
+    public int maxNumberOfBalloons(String text) {
+        // array to save character appearances counter in text
+        int[] chars = new int[26];
+        // iterating over text characters to count each character appearances
+        for (char c : text.toCharArray()) {
+            chars[c - 'a']++;
         }
-        return false;
+
+        // extracting the min appearances count of the chars b,a,l,o,n which describe the max number of "balloons"
+        int min = chars['b' - 'a'];
+        min = Math.min(min, chars['a' - 'a']);
+        min = Math.min(min, chars['l' - 'a'] / 2);
+        min = Math.min(min, chars['o' - 'a'] / 2);
+        min = Math.min(min, chars['n' - 'a']);
+
+        return min;
     }
 }
