@@ -1,21 +1,41 @@
 package shamrokh.muhammad.leetcode.solution;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 class Solution {
-    public int maxNumberOfBalloons(String text) {
-        // array to save character appearances counter in text
-        int[] chars = new int[26];
-        // iterating over text characters to count each character appearances
-        for (char c : text.toCharArray()) {
-            chars[c - 'a']++;
+    public String makeFancyString(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        int consecutiveCharactersCount = 0;
+        StringBuilder sb = new StringBuilder();
+
+        for(int i=0;i<s.length();i++){
+            char currentChar = s.charAt(i);
+
+            if(!stack.isEmpty()){
+                if(stack.peek() == currentChar) {
+                    consecutiveCharactersCount++;
+
+
+                    if (consecutiveCharactersCount <= 2)
+                        stack.push(currentChar);
+                }
+                else {
+                    stack.push(currentChar);
+                    consecutiveCharactersCount = 1;
+                }
+            }
+            else {
+                stack.push(currentChar);
+                consecutiveCharactersCount = 1;
+            }
         }
 
-        // extracting the min appearances count of the chars b,a,l,o,n which describe the max number of "balloons"
-        int min = chars['b' - 'a'];
-        min = Math.min(min, chars['a' - 'a']);
-        min = Math.min(min, chars['l' - 'a'] / 2);
-        min = Math.min(min, chars['o' - 'a'] / 2);
-        min = Math.min(min, chars['n' - 'a']);
+        // scanning stack characters from bottom to top
+        for(char c:stack){
+            sb.append(c);
+        }
 
-        return min;
+        return sb.reverse().toString();
     }
 }

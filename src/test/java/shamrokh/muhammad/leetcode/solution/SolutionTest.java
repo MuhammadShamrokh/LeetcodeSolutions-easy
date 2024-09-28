@@ -17,21 +17,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(1, solution.maxNumberOfBalloons("nlaebolko"));
+        assertEquals("leetcode", solution.makeFancyString("leeetcode"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(2, solution.maxNumberOfBalloons("loonbalxballpoon"));
+        assertEquals("aabaa", solution.makeFancyString("aaabaaaa"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(0, solution.maxNumberOfBalloons("leetcode"));
+        assertEquals("aab", solution.makeFancyString("aab"));
     }
 
     @Test
