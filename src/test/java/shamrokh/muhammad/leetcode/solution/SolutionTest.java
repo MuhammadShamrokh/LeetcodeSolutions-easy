@@ -17,14 +17,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(1, solution.daysBetweenDates("2019-06-29", "2019-06-30"));
+        assertEquals(12, solution.numPrimeArrangements(5));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(15, solution.daysBetweenDates("2020-01-15", "2019-12-31"));
+        assertEquals(682289015, solution.numPrimeArrangements(100));
     }
 
     @Test
