@@ -17,22 +17,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(1, solution.distanceBetweenBusStops(new int[]{1,2,3,4},0,1));
+        assertEquals("Saturday", solution.dayOfTheWeek(31,8,2019));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(3, solution.distanceBetweenBusStops(new int[]{1,2,3,4},0,2));
-
+        assertEquals("Sunday", solution.dayOfTheWeek(18,7,1999));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(4, solution.distanceBetweenBusStops(new int[]{1,2,3,4},0,3));
+        assertEquals("Sunday", solution.dayOfTheWeek(15,8,1993));
     }
 
     @Test
