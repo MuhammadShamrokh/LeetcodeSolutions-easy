@@ -17,21 +17,20 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals("Saturday", solution.dayOfTheWeek(31,8,2019));
+        assertFalse(solution.threeConsecutiveOdds(new int[]{2,6,4,1}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals("Sunday", solution.dayOfTheWeek(18,7,1999));
+        assertTrue(solution.threeConsecutiveOdds(new int[]{1,2,34,3,4,5,7,23,12}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals("Sunday", solution.dayOfTheWeek(15,8,1993));
     }
 
     @Test
