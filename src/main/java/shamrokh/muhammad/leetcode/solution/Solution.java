@@ -1,43 +1,41 @@
 package shamrokh.muhammad.leetcode.solution;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class Solution{
-    private final int MOD = (int)1e9+7;
-    public int numPrimeArrangements(int n) {
-        int primeNumbersAmount = numOfPrimeNumberFromOneToNumber(n);
+    private static final Map<String,String> months = new HashMap<>(){{
+        put("Jan","01");
+        put("Feb","02");
+        put("Mar","03");
+        put("Apr","04");
+        put("May","05");
+        put("Jun","06");
+        put("Jul","07");
+        put("Aug","08");
+        put("Sep","09");
+        put("Oct","10");
+        put("Nov","11");
+        put("Dec","12");
+    }};
 
-        return (int)((factModuloMOD(primeNumbersAmount)*factModuloMOD(n-primeNumbersAmount))%MOD);
+
+    public String reformatDate(String date) {
+        String[] splitDate = date.split(" ");
+        String day = convertDayFormat(splitDate[0]);
+        String month = months.get(splitDate[1]);
+        String year = splitDate[2];
+
+        return String.format("%s-%s-%s", year, month, day);
+
     }
 
-    private int numOfPrimeNumberFromOneToNumber(int number){
-        int count = 0;
-
-        // scanning all the numbers from 2 to number to count the primary numbers
-        for(int n=2;n<=number;n++){
-            boolean isPrime = true;
-
-            // scanning from 2 till sqrt(n) to check if the number is prime
-            for(int d=2;d<=Math.sqrt(n);d++){
-                // the number is not prime
-                if(n%d == 0) {
-                    isPrime = false;
-                    break;
-                }
-            }
-
-            if(isPrime)
-                count++;
+    private String convertDayFormat(String day){
+        if(Character.isAlphabetic(day.charAt(1))){
+            return "0"+day.charAt(0);
         }
-
-        return count;
-    }
-
-    private long factModuloMOD(int num){
-        long result = 1;
-
-        for(int i=2;i<=num;i++){
-            result = (result*i)%MOD;
+        else{
+            return day.substring(0, 2);
         }
-
-        return result;
     }
 }
