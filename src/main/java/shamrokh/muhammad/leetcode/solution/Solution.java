@@ -1,41 +1,30 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 class Solution {
-    public String makeFancyString(String s) {
-        Deque<Character> stack = new ArrayDeque<>();
-        int consecutiveCharactersCount = 0;
-        StringBuilder sb = new StringBuilder();
+    public List<List<Integer>> minimumAbsDifference(int[] arr) {
+        List<List<Integer>> result = new ArrayList<>();
+        int minAbsDifferent = Integer.MAX_VALUE;
 
-        for(int i=0;i<s.length();i++){
-            char currentChar = s.charAt(i);
+        // sorting arr (the different will be minimum between adjacency elements)
+        Arrays.sort(arr);
 
-            if(!stack.isEmpty()){
-                if(stack.peek() == currentChar) {
-                    consecutiveCharactersCount++;
+        // iterating over array elements to build result dual array
+        for(int i=0;i<arr.length-1;i++){
+            int difference = arr[i+1] - arr[i];
 
-
-                    if (consecutiveCharactersCount <= 2)
-                        stack.push(currentChar);
-                }
-                else {
-                    stack.push(currentChar);
-                    consecutiveCharactersCount = 1;
-                }
-            }
-            else {
-                stack.push(currentChar);
-                consecutiveCharactersCount = 1;
+            if(difference < minAbsDifferent){
+                result.clear();
+                result.add(Arrays.asList(arr[i], arr[i+1]));
+                minAbsDifferent = difference;
+            } else if(difference == minAbsDifferent){
+                result.add(Arrays.asList(arr[i], arr[i+1]));
             }
         }
 
-        // scanning stack characters from bottom to top
-        for(char c:stack){
-            sb.append(c);
-        }
-
-        return sb.reverse().toString();
+        return result;
     }
 }

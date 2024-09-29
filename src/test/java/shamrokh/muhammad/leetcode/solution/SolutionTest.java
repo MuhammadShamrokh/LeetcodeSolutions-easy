@@ -3,8 +3,6 @@ package shamrokh.muhammad.leetcode.solution;
 import org.junit.jupiter.api.*;
 
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SolutionTest {
     Solution solution;
@@ -17,21 +15,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals("leetcode", solution.makeFancyString("leeetcode"));
+
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals("aabaa", solution.makeFancyString("aaabaaaa"));
+
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals("aab", solution.makeFancyString("aab"));
+
     }
 
     @Test
