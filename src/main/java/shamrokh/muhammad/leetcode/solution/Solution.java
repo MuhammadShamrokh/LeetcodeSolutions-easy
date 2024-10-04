@@ -1,31 +1,31 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public int balancedStringSplit(String s) {
-        // result will be zero in the first iteration of loop
-        int result = -1;
-        int counter = 0;
-        char currentChar = s.charAt(0);
+    public boolean checkStraightLine(int[][] coordinates) {
+        double slope = 0;
+        boolean isInfinity=false;
+        // it is guarantee that we have more than two points
+        if(coordinates[1][0] != coordinates[0][0])
+            slope= (double)(coordinates[1][1] - coordinates[0][1]) / (coordinates[1][0] - coordinates[0][0]);
+        else
+            isInfinity = true;
 
+        // iterating over points to check that all the points have the same slope with the first point
+        for(int i=2;i<coordinates.length;i++){
+            if(coordinates[i][0] != coordinates[0][0]) {
+                if(isInfinity)
+                    return false;
 
-        for(int i=0;i<s.length();i++) {
-            // start of new balanced string
-            if (counter == 0) {
-                currentChar = s.charAt(i);
-                counter++;
-                result++;
-                continue;
+                if ((double) (coordinates[i][1] - coordinates[0][1]) / (coordinates[i][0] - coordinates[0][0]) != slope) {
+                    return false;
+                }
+            } else {
+                if (!isInfinity) {
+                    return false;
+                }
             }
-
-            // same character, we increase counter
-            if (s.charAt(i) == currentChar)
-                counter++;
-            else // different character, we decrease counter
-                counter--;
         }
 
-        // string s is build from balanced substrings
-        // last balanced substring is not counted in loop, that is why we return result +1
-        return result + 1;
+        return true;
     }
 }
