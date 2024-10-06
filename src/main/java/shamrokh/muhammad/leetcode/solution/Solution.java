@@ -1,31 +1,46 @@
 package shamrokh.muhammad.leetcode.solution;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Solution {
-    public boolean checkStraightLine(int[][] coordinates) {
-        double slope = 0;
-        boolean isInfinity=false;
-        // it is guarantee that we have more than two points
-        if(coordinates[1][0] != coordinates[0][0])
-            slope= (double)(coordinates[1][1] - coordinates[0][1]) / (coordinates[1][0] - coordinates[0][0]);
-        else
-            isInfinity = true;
+    public boolean areAnagrams(String wordOne, String wordTwo) {
+        int[] wordOneLettersCount = new int[26];
+        int[] wordTwoLettersCount = new int[26];
 
-        // iterating over points to check that all the points have the same slope with the first point
-        for(int i=2;i<coordinates.length;i++){
-            if(coordinates[i][0] != coordinates[0][0]) {
-                if(isInfinity)
-                    return false;
+        // counting first word letters
+        for(int i=0;i<wordOne.length();i++)
+            wordOneLettersCount[wordOne.charAt(i) - 'a']++;
 
-                if ((double) (coordinates[i][1] - coordinates[0][1]) / (coordinates[i][0] - coordinates[0][0]) != slope) {
-                    return false;
-                }
-            } else {
-                if (!isInfinity) {
-                    return false;
-                }
+        //counting second word letters
+        for(int i=0;i<wordTwo.length();i++)
+            wordTwoLettersCount[wordTwo.charAt(i) - 'a']++;
+
+        // checking if anagram (counters need to be equal)
+        for(int i=0;i<26;i++){
+            if(wordOneLettersCount[i] != wordTwoLettersCount[i])
+                return false;
+        }
+
+        // if we reach here, both words are anagram
+        return true;
+    }
+
+    public List<String> removeAnagrams(String[] words) {
+        List<String> result = new ArrayList<>();
+
+        // Add the first word to the result list
+        result.add(words[0]);
+
+        // Iterate through the array, starting from the second word
+        for (int i = 1; i < words.length; i++) {
+            // If the current word is not an anagram of the previous word, add it to result
+            if (!areAnagrams(words[i], words[i - 1])) {
+                result.add(words[i]);
             }
         }
 
-        return true;
+        return result;
     }
 }
