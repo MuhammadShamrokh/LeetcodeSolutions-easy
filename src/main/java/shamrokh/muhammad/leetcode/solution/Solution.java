@@ -1,46 +1,47 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 class Solution {
-    public boolean areAnagrams(String wordOne, String wordTwo) {
-        int[] wordOneLettersCount = new int[26];
-        int[] wordTwoLettersCount = new int[26];
+    public String greatestLetter(String s) {
+        int[] uppercaseSeenLetters = new int[26];
+        int[] lowercaseSeenLetters = new int[26];
+        String maxChar = "";
 
-        // counting first word letters
-        for(int i=0;i<wordOne.length();i++)
-            wordOneLettersCount[wordOne.charAt(i) - 'a']++;
+        for(int i=0;i<s.length();i++){
+            char currentChar = s.charAt(i);
 
-        //counting second word letters
-        for(int i=0;i<wordTwo.length();i++)
-            wordTwoLettersCount[wordTwo.charAt(i) - 'a']++;
+            if(Character.isUpperCase(currentChar)){
+                char currentLowerCaseCharacter = Character.toLowerCase(currentChar);
 
-        // checking if anagram (counters need to be equal)
-        for(int i=0;i<26;i++){
-            if(wordOneLettersCount[i] != wordTwoLettersCount[i])
-                return false;
-        }
+                // we faced currentChar lowercase
+                if(lowercaseSeenLetters[currentLowerCaseCharacter - 'a'] == 1){
+                    // greatest letter so far
+                    if(maxChar.isEmpty() || currentChar > maxChar.charAt(0)){
+                        maxChar = Character.toString(currentChar);
+                    }
+                }
+                // we did not face currentChar lowercase
+                else {
+                    // we add the char to the array
+                    uppercaseSeenLetters[currentChar - 'A'] = 1;
+                }
+            } else { //lowercase Letter
+                char currentUpperCaseCharacter = Character.toUpperCase(currentChar);
 
-        // if we reach here, both words are anagram
-        return true;
-    }
-
-    public List<String> removeAnagrams(String[] words) {
-        List<String> result = new ArrayList<>();
-
-        // Add the first word to the result list
-        result.add(words[0]);
-
-        // Iterate through the array, starting from the second word
-        for (int i = 1; i < words.length; i++) {
-            // If the current word is not an anagram of the previous word, add it to result
-            if (!areAnagrams(words[i], words[i - 1])) {
-                result.add(words[i]);
+                // we faced currentChar upper case
+                if(uppercaseSeenLetters[currentUpperCaseCharacter - 'A'] == 1){
+                    // greatest letter so far
+                    if(maxChar.isEmpty() || currentUpperCaseCharacter > maxChar.charAt(0)){
+                        maxChar = Character.toString(currentUpperCaseCharacter);
+                    }
+                }
+                // we did not face currentChar uppercase
+                else {
+                    // we add the char to the array
+                    lowercaseSeenLetters[currentChar - 'a'] = 1;
+                }
             }
         }
 
-        return result;
+        return maxChar;
     }
 }

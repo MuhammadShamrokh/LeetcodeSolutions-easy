@@ -19,21 +19,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-
+        assertEquals("E", solution.greatestLetter("lEeTcOdE"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-
+        assertEquals("R", solution.greatestLetter("arRAzFif"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        assertEquals("", solution.greatestLetter("AbCdEfGhIjK"));
     }
 
     @Test
