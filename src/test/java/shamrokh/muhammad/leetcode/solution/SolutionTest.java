@@ -2,7 +2,6 @@ package shamrokh.muhammad.leetcode.solution;
 
 import org.junit.jupiter.api.*;
 
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,21 +18,24 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals("E", solution.greatestLetter("lEeTcOdE"));
+        assertEquals(6, solution.oddCells(2, 3, new int[][]{{0,1},{1,1}}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals("R", solution.greatestLetter("arRAzFif"));
+        assertEquals(0, solution.oddCells(2, 2, new int[][]{{1,1},{0,0}}));
+
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals("", solution.greatestLetter("AbCdEfGhIjK"));
+        assertEquals(460, solution.oddCells(28, 38, new int[][]{
+                {17,16},{26,31},{19,12},{22,24},{17,28},{23,21},{27,32},{23,27},{23,33},{18,7},{4,20},{0,31},{25,33},{5,22}
+        }));
     }
 
     @Test
