@@ -1,25 +1,41 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public int oddCells(int m, int n, int[][] indices) {
-        int[] incrementsInRowsCount = new int[m];
-        int[] incrementsInColsCount = new int[n];
-        int oddCellsCounter = 0;
+    public double calculateTax(int[][] brackets, int income) {
+        double totalTax;
+        boolean done = false;
 
-        // counting number of increments in each row and col
-        for(int i=0;i<indices.length;i++){
-            incrementsInRowsCount[indices[i][0]]++;
-            incrementsInColsCount[indices[i][1]]++;
+        //first tax
+        int taxAmount;
+        if(brackets[0][0] < income) {
+            taxAmount = brackets[0][0];
+        }
+        else {
+            taxAmount = income;
+            done = true;
         }
 
-        // scanning matrix to count odd cells
-        for(int r=0;r<m;r++){
-            for(int c=0;c<n;c++){
-                if((incrementsInRowsCount[r] + incrementsInColsCount[c])%2 == 1)
-                    oddCellsCounter++;
+        int percentage = brackets[0][1];
+
+        totalTax = taxAmount*((double) percentage /100);
+
+        // iterating over the rest of taxes
+        for(int i=1;i<brackets.length && !done;i++){
+            if(brackets[i][0] < income) {
+                taxAmount = brackets[i][0] - brackets[i - 1][0];
             }
+            else {
+                taxAmount = income - brackets[i - 1][0];
+                done = true;
+            }
+
+            percentage = brackets[i][1];
+
+            double currentTax = taxAmount*((double) percentage /100);
+
+            totalTax += currentTax;
         }
 
-        return oddCellsCounter;
+        return totalTax;
     }
 }
