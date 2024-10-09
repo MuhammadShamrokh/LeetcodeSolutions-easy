@@ -1,41 +1,45 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 class Solution {
-    public List<List<Integer>> shiftGrid(int[][] grid, int k) {
-        int rows = grid.length;
-        int columns = grid[0].length;
-        int totalElements = rows * columns;
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        Set<Integer> numbersOneSet = convertArrayToSet(nums1);
+        Set<Integer> numbersTwoSet = convertArrayToSet(nums2);
+        List<List<Integer>> result = new ArrayList<>(2);
 
-        // Result grid to store the shifted elements
-        List<List<Integer>> result = new ArrayList<>();
-
-        // Flatten the grid to a 1D array
-        int[] flatGrid = new int[totalElements];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                flatGrid[i * columns + j] = grid[i][j];
+        // scanning all distinct elements in nums1 (Set)
+        // to find all elements that does not appear in nums2
+        List<Integer> listOfElementsOne = new ArrayList<>();
+        for(Integer elem:numbersOneSet){
+            if(!numbersTwoSet.contains(elem)){
+                listOfElementsOne.add(elem);
             }
         }
 
-        // Calculate the new grid after shifting
-        int[] shiftedGrid = new int[totalElements];
-        for (int i = 0; i < totalElements; i++) {
-            // Calculate the new index after k shifts
-            shiftedGrid[(i + k) % totalElements] = flatGrid[i];
+        // scanning all distinct elements in nums2 (Set)
+        // to find all elements that does not appear in nums1
+        List<Integer> listOfElementsTwo = new ArrayList<>();
+        for(Integer elem:numbersTwoSet){
+            if(!numbersOneSet.contains(elem)){
+                listOfElementsTwo.add(elem);
+            }
         }
 
-        // Rebuild the 2D grid from the shifted 1D array
-        for (int i = 0; i < rows; i++) {
-            List<Integer> row = new ArrayList<>();
-            for (int j = 0; j < columns; j++) {
-                row.add(shiftedGrid[i * columns + j]);
-            }
-            result.add(row);
-        }
+        // adding results lists into final 2D list
+        result.add(listOfElementsOne);
+        result.add(listOfElementsTwo);
 
         return result;
+    }
+
+    private Set<Integer> convertArrayToSet(int[] arr){
+        Set<Integer> resultSet = new HashSet<>();
+
+        for(int elem:arr){
+            resultSet.add(elem);
+        }
+
+        return resultSet;
     }
 }
