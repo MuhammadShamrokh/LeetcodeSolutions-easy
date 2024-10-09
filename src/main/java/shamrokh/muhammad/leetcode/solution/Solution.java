@@ -1,41 +1,41 @@
 package shamrokh.muhammad.leetcode.solution;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
-    public double calculateTax(int[][] brackets, int income) {
-        double totalTax;
-        boolean done = false;
+    public List<List<Integer>> shiftGrid(int[][] grid, int k) {
+        int rows = grid.length;
+        int columns = grid[0].length;
+        int totalElements = rows * columns;
 
-        //first tax
-        int taxAmount;
-        if(brackets[0][0] < income) {
-            taxAmount = brackets[0][0];
-        }
-        else {
-            taxAmount = income;
-            done = true;
-        }
+        // Result grid to store the shifted elements
+        List<List<Integer>> result = new ArrayList<>();
 
-        int percentage = brackets[0][1];
-
-        totalTax = taxAmount*((double) percentage /100);
-
-        // iterating over the rest of taxes
-        for(int i=1;i<brackets.length && !done;i++){
-            if(brackets[i][0] < income) {
-                taxAmount = brackets[i][0] - brackets[i - 1][0];
+        // Flatten the grid to a 1D array
+        int[] flatGrid = new int[totalElements];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                flatGrid[i * columns + j] = grid[i][j];
             }
-            else {
-                taxAmount = income - brackets[i - 1][0];
-                done = true;
-            }
-
-            percentage = brackets[i][1];
-
-            double currentTax = taxAmount*((double) percentage /100);
-
-            totalTax += currentTax;
         }
 
-        return totalTax;
+        // Calculate the new grid after shifting
+        int[] shiftedGrid = new int[totalElements];
+        for (int i = 0; i < totalElements; i++) {
+            // Calculate the new index after k shifts
+            shiftedGrid[(i + k) % totalElements] = flatGrid[i];
+        }
+
+        // Rebuild the 2D grid from the shifted 1D array
+        for (int i = 0; i < rows; i++) {
+            List<Integer> row = new ArrayList<>();
+            for (int j = 0; j < columns; j++) {
+                row.add(shiftedGrid[i * columns + j]);
+            }
+            result.add(row);
+        }
+
+        return result;
     }
 }
