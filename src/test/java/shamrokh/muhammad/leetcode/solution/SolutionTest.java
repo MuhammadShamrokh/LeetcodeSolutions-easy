@@ -18,21 +18,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(7, solution.minTimeToVisitAllPoints(new int[][]{{1,1},{3,4},{-1,0}}));
+        assertEquals("A", solution.tictactoe(new int[][]{{0,0},{2,0},{1,1},{2,1},{2,2}}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(5, solution.minTimeToVisitAllPoints(new int[][]{{3,2},{-2,2}}));
+        assertEquals("B", solution.tictactoe(new int[][]{{0,0},{1,1},{0,1},{0,2},{1,0},{2,0}}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        assertEquals("Draw", solution.tictactoe(new int[][]{{0,0},{1,1},{2,0},{1,0},{1,2},{2,1},{0,1},{0,2},{2,2}}));
     }
 
     @Test
