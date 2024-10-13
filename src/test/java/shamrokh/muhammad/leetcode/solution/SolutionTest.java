@@ -18,14 +18,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-
+        assertEquals(7, solution.minTimeToVisitAllPoints(new int[][]{{1,1},{3,4},{-1,0}}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-
+        assertEquals(5, solution.minTimeToVisitAllPoints(new int[][]{{3,2},{-2,2}}));
     }
 
     @Test
