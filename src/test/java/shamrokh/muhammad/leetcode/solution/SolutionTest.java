@@ -18,12 +18,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
+        assertEquals(2, solution.findNumbers(new int[]{12,345,2,6,7896}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
+        assertEquals(1, solution.findNumbers(new int[]{555,901,482,1771}));
     }
 
     @Test
