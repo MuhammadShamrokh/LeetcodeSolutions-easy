@@ -1,17 +1,17 @@
 package shamrokh.muhammad.leetcode.solution;
 
+import shamrokh.muhammad.leetcode.datastructure.ListNode;
+
 class Solution {
-    public int subtractProductAndSum(int n) {
-        int digitsProduct = 1;
-        int digitsSum = 0;
+    public int getDecimalValue(ListNode head) {
+        ListNode scanner = head;
+        int result = 0;
 
-        while(n>0){
-            digitsProduct *= n%10;
-            digitsSum += n%10;
-
-            n=n/10;
+        while(scanner != null){
+            result = result * 2 + scanner.val;
+            scanner = scanner.next;
         }
 
-        return digitsProduct - digitsSum;
+        return result;
     }
 }

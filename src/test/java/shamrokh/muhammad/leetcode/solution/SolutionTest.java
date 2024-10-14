@@ -18,14 +18,12 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(15 ,solution.subtractProductAndSum(234));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(21 ,solution.subtractProductAndSum(4421));
     }
 
     @Test
