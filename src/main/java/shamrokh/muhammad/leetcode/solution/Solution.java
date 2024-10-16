@@ -1,22 +1,35 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public int divisorSubstrings(int num, int k) {
-        String number = Integer.toString(num);
-        int divisorsCount = 0;
+    public String freqAlphabets(String s) {
+        StringBuilder sb = new StringBuilder();
 
-        // iterating over k-length substrings
-        for(int i=0;i<=number.length()-k;i++){
-            int currentSubstringValue = Integer.parseInt(number.substring(i,i+k));
+        // iterating over s characters to map it to string
+        for(int i=0;i<s.length();i++){
+            char currentChar;
 
-            // making sure that the currentSubstringValue is not zero
-            if(currentSubstringValue != 0) {
-                // checking if num divide by the substring
-                if (num % currentSubstringValue == 0)
-                    divisorsCount++;
+            switch (s.charAt(i)) {
+                case '1', '2' -> {
+                    // Characters ('j' to 'z')
+                    if(i+2<s.length() && s.charAt(i+2)=='#'){
+                        currentChar = (char)('a' + Integer.parseInt(s.substring(i,i+2)) - 1);
+                        i+=2;
+                    } else { // Characters ('a' to 'b')
+                        currentChar = (char)('a' + (s.charAt(i) - '0' - 1));
+                    }
+
+                    sb.append(currentChar);
+                }
+                //Characters ('a' to 'i')
+                default -> {
+                    currentChar = (char)('a' + (s.charAt(i) - '0' - 1));
+                    sb.append(currentChar);
+                }
+
+
             }
         }
 
-        return divisorsCount;
+        return sb.toString();
     }
 }

@@ -18,14 +18,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(2, solution.divisorSubstrings(240, 2));
+        assertEquals("jkab", solution.freqAlphabets("10#11#12"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(2, solution.divisorSubstrings(430043, 2));
+        assertEquals("acz", solution.freqAlphabets("1326#"));
     }
 
     @Test
