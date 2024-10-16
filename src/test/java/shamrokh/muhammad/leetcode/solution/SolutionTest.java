@@ -18,13 +18,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-
+        assertEquals(6, solution.numberOfSteps(14));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
+        assertEquals(4, solution.numberOfSteps(8));
 
     }
 
