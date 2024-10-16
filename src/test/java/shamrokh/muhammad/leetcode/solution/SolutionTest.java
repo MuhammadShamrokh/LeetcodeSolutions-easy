@@ -18,22 +18,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(6, solution.numberOfSteps(14));
+        assertEquals(9969, solution.maximum69Number(9669));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(4, solution.numberOfSteps(8));
-
+        assertEquals(9999, solution.maximum69Number(9996));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        assertEquals(9999, solution.maximum69Number(9999));
     }
 
     @Test

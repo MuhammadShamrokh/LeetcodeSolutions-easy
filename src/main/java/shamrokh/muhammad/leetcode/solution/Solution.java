@@ -1,20 +1,18 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public int numberOfSteps(int num) {
-        int numberOfStepsCounter = 0;
+    public int maximum69Number (int num) {
+        StringBuilder sb = new StringBuilder(Integer.toString(num));
 
-        while(num>0){
-            if(num%2==0){
-                num/=2;
+        // iterating num from MSD to LSD
+        for(int i=0;i<sb.length();i++){
+            // we convert the first appearance of 6 to 9
+            if(sb.charAt(i)=='6') {
+                sb.setCharAt(i, '9');
+                break;
             }
-            else {
-                num-=1;
-            }
-
-            numberOfStepsCounter++;
         }
 
-        return numberOfStepsCounter;
+        return Integer.parseInt(sb.toString());
     }
 }
