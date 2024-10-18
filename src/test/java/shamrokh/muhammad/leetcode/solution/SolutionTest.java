@@ -18,9 +18,6 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        int[] expected = new int[]{0,1,2,4,8,3,5,6,7};
-
-        assertArrayEquals(expected, solution.sortByBits(new int[]{0,1,2,3,4,5,6,7,8}));
 
     }
 
@@ -28,9 +25,15 @@ class SolutionTest {
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        int[] expected = new int[]{1,2,4,8,16,32,64,128,256,512,1024};
+        int[] expected = new int[]{2,0,3};
 
-        assertArrayEquals(expected, solution.sortByBits(new int[]{1024,512,256,128,64,32,16,8,4,2,1}));
+        assertArrayEquals(expected, solution.kWeakestRows(new int[][]{
+                {1,1,0,0,0},
+                {1,1,1,1,0},
+                {1,0,0,0,0},
+                {1,1,0,0,0},
+                {1,1,1,1,1}},
+                3));
     }
 
     @Test

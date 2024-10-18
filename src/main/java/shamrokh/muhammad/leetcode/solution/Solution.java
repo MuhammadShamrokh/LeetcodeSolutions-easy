@@ -1,89 +1,58 @@
 package shamrokh.muhammad.leetcode.solution;
 
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
 class Solution {
-    private static final Comparator<Integer> comparator;
+    private static class Power implements Comparable<Power>{
+        private final int soldiers;
+        private final int index;
 
-    static {
-        comparator = (o1, o2) -> {
-            int tmp1 = o1;
-            int tmp2 = o2;
-            int counter1 = 0;
-            int counter2 = 0;
+        public Power(int soldiers, int index) {
+            this.soldiers = soldiers;
+            this.index = index;
+        }
 
-            while(tmp1>0){
-                if(tmp1%2==1){
-                    counter1++;
-                }
+        @Override
+        public int compareTo(Power o) {
+            if(this.soldiers != o.soldiers)
+                return this.soldiers - o.soldiers;
 
-                tmp1>>>=1;
-            }
-
-            while(tmp2>0){
-                if(tmp2%2==1){
-                    counter2++;
-                }
-
-                tmp2>>=1;
-            }
-
-            if(counter1 != counter2)
-                return counter1 - counter2;
-
-            return o1-o2;
-        };
+            return this.index - o.index;
+        }
     }
 
-    public int[] sortByBits(int[] arr) {
-        quickSort(arr, 0, arr.length-1);
+    public int[] kWeakestRows(int[][] mat, int k) {
+        PriorityQueue<Power> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+        int[] result = new int[k];
 
-        return arr;
-    }
+        // scanning all matrix rows
+        for(int i=0;i<mat.length;i++){
+            int[] currentRow = mat[i];
+            int soldiersCount = 0;
 
-    private int partition(int[] arr, int low, int high) {
+            // iterating over row values to count soldiers
+            for(int value : currentRow) {
+                if (value == 0)
+                    break;
 
-        // Choose the pivot
-        int pivot = arr[high];
+                soldiersCount++;
+            }
 
-        // Index of smaller element and indicates
-        // the right position of pivot found so far
-        int i = low - 1;
-
-        // Traverse arr[low..high] and move all smaller
-        // elements to the left side. Elements from low to
-        // i are smaller after every iteration
-        for (int j = low; j <= high - 1; j++) {
-            if (comparator.compare(pivot,arr[j])>0) {
-                i++;
-                swap(arr, i, j);
+            // adding power to min heap
+            maxHeap.add(new Power(soldiersCount, i));
+            // the size is bigger than k, we remove the biggest element
+            // we stay with smaller values
+            if(maxHeap.size() > k){
+                maxHeap.remove();
             }
         }
 
-        // Move pivot after smaller elements and
-        // return its position
-        swap(arr, i + 1, high);
-        return i + 1;
-    }
-
-    // Swap function
-    private  void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
-    // The QuickSort function implementation
-    private void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-
-            // pi is the partition return index of pivot
-            int pi = partition(arr, low, high);
-
-            // Recursion calls for smaller elements
-            // and greater or equals elements
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
+        // building result array
+        for(int i=0;i<k;i++){
+            result[k-1-i] = maxHeap.remove().index;
         }
+
+        return result;
     }
 }
