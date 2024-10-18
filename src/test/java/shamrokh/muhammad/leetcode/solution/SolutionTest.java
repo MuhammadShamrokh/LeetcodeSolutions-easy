@@ -18,22 +18,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-
+        assertTrue(solution.checkIfExist(new int[]{10,2,5,3}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        int[] expected = new int[]{2,0,3};
-
-        assertArrayEquals(expected, solution.kWeakestRows(new int[][]{
-                {1,1,0,0,0},
-                {1,1,1,1,0},
-                {1,0,0,0,0},
-                {1,1,0,0,0},
-                {1,1,1,1,1}},
-                3));
+        assertFalse(solution.checkIfExist(new int[]{3,1,7,11}));
     }
 
     @Test

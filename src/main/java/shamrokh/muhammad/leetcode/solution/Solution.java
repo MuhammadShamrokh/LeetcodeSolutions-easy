@@ -1,58 +1,26 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.HashMap;
+import java.util.Map;
+
 
 class Solution {
-    private static class Power implements Comparable<Power>{
-        private final int soldiers;
-        private final int index;
+    public boolean checkIfExist(int[] arr) {
+        Map<Integer, Integer> valueToIndexMap = new HashMap<>();
 
-        public Power(int soldiers, int index) {
-            this.soldiers = soldiers;
-            this.index = index;
-        }
+        for(int i=0;i<arr.length;i++){
 
-        @Override
-        public int compareTo(Power o) {
-            if(this.soldiers != o.soldiers)
-                return this.soldiers - o.soldiers;
+            // checking if we saw arr[i]*2 or arr[i]/2 at earlier iteration
+            if(valueToIndexMap.containsKey(2*arr[i])  ||
+                    ((double)arr[i]/2 % 1 == 0 &&valueToIndexMap.containsKey(arr[i]/2))){
 
-            return this.index - o.index;
-        }
-    }
-
-    public int[] kWeakestRows(int[][] mat, int k) {
-        PriorityQueue<Power> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
-        int[] result = new int[k];
-
-        // scanning all matrix rows
-        for(int i=0;i<mat.length;i++){
-            int[] currentRow = mat[i];
-            int soldiersCount = 0;
-
-            // iterating over row values to count soldiers
-            for(int value : currentRow) {
-                if (value == 0)
-                    break;
-
-                soldiersCount++;
+                return true;
             }
 
-            // adding power to min heap
-            maxHeap.add(new Power(soldiersCount, i));
-            // the size is bigger than k, we remove the biggest element
-            // we stay with smaller values
-            if(maxHeap.size() > k){
-                maxHeap.remove();
-            }
+            valueToIndexMap.put(arr[i], i);
         }
 
-        // building result array
-        for(int i=0;i<k;i++){
-            result[k-1-i] = maxHeap.remove().index;
-        }
-
-        return result;
+        return false;
     }
 }
+
