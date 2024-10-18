@@ -1,18 +1,22 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public int maximum69Number (int num) {
-        StringBuilder sb = new StringBuilder(Integer.toString(num));
+    public int removePalindromeSub(String s) {
+        return isPalindrome(s)? 1:2;
+    }
 
-        // iterating num from MSD to LSD
-        for(int i=0;i<sb.length();i++){
-            // we convert the first appearance of 6 to 9
-            if(sb.charAt(i)=='6') {
-                sb.setCharAt(i, '9');
-                break;
-            }
+    private boolean isPalindrome(String s) {
+        int start = 0;
+        int end = s.length() - 1;
+
+        while(start<end){
+            if(s.charAt(start) != s.charAt(end))
+                return false;
+
+            start++;
+            end--;
         }
 
-        return Integer.parseInt(sb.toString());
+        return true;
     }
 }

@@ -18,28 +18,30 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(9969, solution.maximum69Number(9669));
+        assertEquals(1, solution.removePalindromeSub("ababa"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(9999, solution.maximum69Number(9996));
+        assertEquals(2, solution.removePalindromeSub("abb"));
+
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(9999, solution.maximum69Number(9999));
+        assertEquals(2, solution.removePalindromeSub("baabb"));
+
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-
+        assertEquals(1, solution.removePalindromeSub("a"));
     }
 
 }
