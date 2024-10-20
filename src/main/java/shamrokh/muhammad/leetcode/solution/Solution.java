@@ -1,39 +1,25 @@
 package shamrokh.muhammad.leetcode.solution;
 
-
 class Solution {
-    public String sortString(String s) {
-        StringBuilder sb = new StringBuilder();
-        int[] lettersCount = new int[26];
-        boolean changed = true;
+    public int countNegatives(int[][] grid) {
+        int negativeNumbersCounter = 0;
+        int rows = grid.length;
+        int columns = grid[0].length;
 
+        // iterating over grid rows
+        for (int[] ints : grid) {
+            // iterating over grid columns
+            for (int j = columns - 1; j >= 0; j--) {
+                // if we reach positive number we stop the column scan
+                if (ints[j] >= 0)
+                    break;
 
-        // scanning s characters to count them
-        for(int i=0;i<s.length();i++){
-            lettersCount[s.charAt(i) - 'a']++;
-        }
-
-        while(changed) {
-            changed = false;
-
-            for(int i=0;i<26;i++){
-                if(lettersCount[i] != 0){
-                    sb.append((char)(i + 'a'));
-                    lettersCount[i]--;
-                    changed = true;
-                }
-            }
-
-            for(int i=25;i>=0;i--){
-                if(lettersCount[i] != 0){
-                    sb.append((char)(i + 'a'));
-                    lettersCount[i]--;
-                    changed = true;
-                }
+                // we did not reach non-negative numbers, we increase counter
+                negativeNumbersCounter++;
             }
         }
 
-        return sb.toString();
+        return negativeNumbersCounter;
     }
 }
 
