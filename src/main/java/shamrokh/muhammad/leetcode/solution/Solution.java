@@ -1,26 +1,39 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.HashMap;
-import java.util.Map;
-
 
 class Solution {
-    public boolean checkIfExist(int[] arr) {
-        Map<Integer, Integer> valueToIndexMap = new HashMap<>();
+    public String sortString(String s) {
+        StringBuilder sb = new StringBuilder();
+        int[] lettersCount = new int[26];
+        boolean changed = true;
 
-        for(int i=0;i<arr.length;i++){
 
-            // checking if we saw arr[i]*2 or arr[i]/2 at earlier iteration
-            if(valueToIndexMap.containsKey(2*arr[i])  ||
-                    ((double)arr[i]/2 % 1 == 0 &&valueToIndexMap.containsKey(arr[i]/2))){
-
-                return true;
-            }
-
-            valueToIndexMap.put(arr[i], i);
+        // scanning s characters to count them
+        for(int i=0;i<s.length();i++){
+            lettersCount[s.charAt(i) - 'a']++;
         }
 
-        return false;
+        while(changed) {
+            changed = false;
+
+            for(int i=0;i<26;i++){
+                if(lettersCount[i] != 0){
+                    sb.append((char)(i + 'a'));
+                    lettersCount[i]--;
+                    changed = true;
+                }
+            }
+
+            for(int i=25;i>=0;i--){
+                if(lettersCount[i] != 0){
+                    sb.append((char)(i + 'a'));
+                    lettersCount[i]--;
+                    changed = true;
+                }
+            }
+        }
+
+        return sb.toString();
     }
 }
 
