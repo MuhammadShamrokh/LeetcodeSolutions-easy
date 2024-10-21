@@ -1,25 +1,29 @@
 package shamrokh.muhammad.leetcode.solution;
 
+
 class Solution {
-    public int countNegatives(int[][] grid) {
-        int negativeNumbersCounter = 0;
-        int rows = grid.length;
-        int columns = grid[0].length;
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] numbersCounter = new int[101];
+        int[] totalSumTillNum = new int[101];
+        int[] result = new int[nums.length];
 
-        // iterating over grid rows
-        for (int[] ints : grid) {
-            // iterating over grid columns
-            for (int j = columns - 1; j >= 0; j--) {
-                // if we reach positive number we stop the column scan
-                if (ints[j] >= 0)
-                    break;
-
-                // we did not reach non-negative numbers, we increase counter
-                negativeNumbersCounter++;
-            }
+        // counting each number appearances
+        for(int num:nums){
+            numbersCounter[num]++;
         }
 
-        return negativeNumbersCounter;
+        // building total sum array (
+        totalSumTillNum[0] = 0;
+        for(int i=1;i<=100;i++){
+            totalSumTillNum[i] = totalSumTillNum[i-1] + numbersCounter[i-1];
+        }
+
+        // iterating over nums to build result array using totalSumTillNum array
+        for(int i=0;i<nums.length;i++){
+            result[i] = totalSumTillNum[nums[i]];
+        }
+
+        return result;
     }
 }
 

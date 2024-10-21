@@ -18,14 +18,18 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(8, solution.countNegatives(new int[][]{{4,3,2,-1},{3,2,1,-1},{1,1,-1,-2},{-1,-1,-2,-3}}));
+        int[] expected = new int[]{2,1,0,3};
+
+        assertArrayEquals(expected, solution.smallerNumbersThanCurrent(new int[]{6,5,4,8}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(0, solution.countNegatives(new int[][]{{3,2},{1,0}}));
+        int[] expected = new int[]{0,0,0,0};
+
+        assertArrayEquals(expected, solution.smallerNumbersThanCurrent(new int[]{7,7,7,7}));
     }
 
     @Test
