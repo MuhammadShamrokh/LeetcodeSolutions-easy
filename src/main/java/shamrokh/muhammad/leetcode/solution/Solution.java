@@ -1,65 +1,47 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.ArrayList;
-import java.util.List;
+import shamrokh.muhammad.leetcode.datastructure.TreeNode;
+
 
 class Solution {
-    public List<Integer> luckyNumbers(int[][] matrix) {
-        int[] minElementInEachRow = findMinElementInArrayRows(matrix);
-        int[] maxElementInEachColumn = findMaxElementInArrayColumns(matrix);
-        List<Integer> result = new ArrayList<>();
+    public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
+        // we received one Node tree, target is root
+        if(cloned.left == null && cloned.right == null)
+            return cloned;
 
-        for(int min:minElementInEachRow){
-            for(int max:maxElementInEachColumn){
-                if(min==max){
-                    result.add(min);
-                }
-            }
-        }
-
-        return result;
+        return findTargetCopy(cloned, target);
     }
 
-    private int[] findMaxElementInArrayColumns(int[][] matrix) {
-        int rows = matrix.length;
-        int columns = matrix[0].length;
-        int[] maxColumnsElements = new int[columns];
+    private TreeNode findTargetCopy(TreeNode cloned, TreeNode target) {
+        if(cloned == null)
+            return null;
 
+        // equal values, checking if same tree (which mean same node since it is a clone)
+        if(cloned.val == target.val && similarTrees(cloned, target))
+            return cloned;
 
-        for(int i=0;i<columns;i++){
-            int maxInColumn = matrix[0][i];
+        //  the node in left subtree
+        TreeNode left = findTargetCopy(cloned.left, target);
+        if(left != null)
+            return left;
 
-            for(int j=1;j<rows;j++){
-                if(maxInColumn<matrix[j][i])
-                    maxInColumn = matrix[j][i];
-            }
+        // searching node in right subtree
+        return findTargetCopy(cloned.right,target);
 
-            maxColumnsElements[i] = maxInColumn;
-        }
-
-        return maxColumnsElements;
     }
 
-    private int[] findMinElementInArrayRows(int[][] matrix) {
-        int numOfRows = matrix.length;
-        int[] result = new int[numOfRows];
+    private boolean similarTrees(TreeNode cloned, TreeNode target) {
+        //both roots are null
+        if(cloned == null && target == null)
+            return true;
 
-        // building min element in each row array
-        for(int i=0;i<numOfRows;i++){
-            result[i] = findMinElementInRow(matrix[i]);
-        }
+        // at least one of the roots is not root
+        if(cloned == null || target == null)
+            return false;
 
-        return result;
-    }
-
-    private int findMinElementInRow(int[] row) {
-        int min = row[0];
-
-        for(int i=1;i<row.length;i++){
-            if(min>row[i])
-                min = row[i];
-        }
-
-        return min;
+        // recursively checking if both trees are equal
+        return cloned.val == target.val &&
+                similarTrees(cloned.left,target.left) &&
+                similarTrees(cloned.right, target.right);
     }
 }
