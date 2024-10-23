@@ -18,12 +18,14 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
+        assertEquals(4, solution.countLargestGroup(13));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
+        assertEquals(2, solution.countLargestGroup(2));
     }
 
     @Test

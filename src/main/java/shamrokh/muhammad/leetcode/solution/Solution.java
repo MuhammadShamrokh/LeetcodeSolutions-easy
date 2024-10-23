@@ -1,47 +1,45 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import shamrokh.muhammad.leetcode.datastructure.TreeNode;
-
-
 class Solution {
-    public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
-        // we received one Node tree, target is root
-        if(cloned.left == null && cloned.right == null)
-            return cloned;
+    private final int MAX_FOUR_DIGITS_SUM = 37;
+    public int countLargestGroup(int n) {
+        int[] groupsSize = new int[MAX_FOUR_DIGITS_SUM];
+        int maxGroupSize = 0;
+        int groupsWithMaxSize = 0;
 
-        return findTargetCopy(cloned, target);
+        // iterating over the numbers [1, n]
+        for(int i=1;i<=n;i++){
+            // sum the digits
+            int digitsSum = sumNumDigits(i);
+
+            // add result to corresponding group
+            groupsSize[digitsSum]++;
+        }
+
+        // finding the number of groups with max size
+        for(int size:groupsSize){
+            if(size > maxGroupSize){
+                maxGroupSize = size;
+                groupsWithMaxSize = 1;
+            }
+            else if(size == maxGroupSize){
+                groupsWithMaxSize++;
+            }
+        }
+
+        return groupsWithMaxSize;
     }
 
-    private TreeNode findTargetCopy(TreeNode cloned, TreeNode target) {
-        if(cloned == null)
-            return null;
+    private int sumNumDigits(int num) {
+        int digitsSum = 0;
 
-        // equal values, checking if same tree (which mean same node since it is a clone)
-        if(cloned.val == target.val && similarTrees(cloned, target))
-            return cloned;
+        while(num > 0){
+            digitsSum += (num%10);
+            num /=10;
+        }
 
-        //  the node in left subtree
-        TreeNode left = findTargetCopy(cloned.left, target);
-        if(left != null)
-            return left;
-
-        // searching node in right subtree
-        return findTargetCopy(cloned.right,target);
-
-    }
-
-    private boolean similarTrees(TreeNode cloned, TreeNode target) {
-        //both roots are null
-        if(cloned == null && target == null)
-            return true;
-
-        // at least one of the roots is not root
-        if(cloned == null || target == null)
-            return false;
-
-        // recursively checking if both trees are equal
-        return cloned.val == target.val &&
-                similarTrees(cloned.left,target.left) &&
-                similarTrees(cloned.right, target.right);
+        return digitsSum;
     }
 }
+
+
