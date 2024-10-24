@@ -1,21 +1,41 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Solution {
-    public int minStartValue(int[] nums) {
-        int minValueDuringIteration = Integer.MAX_VALUE;
-        int currentValue = 0;
+    public List<Integer> minSubsequence(int[] nums) {
+        List<Integer> result = new ArrayList<>();
+        int currentListElementsSum = 0;
+        int numsElementsSum = sumArrElements(nums);
 
-        // iterating over nums to check lowest value we can get/
-        for(int num:nums){
-            currentValue+=num;
+        Arrays.sort(nums);
 
-            minValueDuringIteration = Math.min(currentValue, minValueDuringIteration);
+        // scanning the array from bigger elements to smaller elements
+        for(int i= nums.length-1;i>=0;i--){
+            // adding nums[i] to subsequence
+            result.add(nums[i]);
+            currentListElementsSum+=nums[i];
+            numsElementsSum-=nums[i];
+
+            if(currentListElementsSum > numsElementsSum){
+                break;
+            }
         }
 
-        // if lowest value is greater than 1 we return 1 as a lowest start value
-        // else, we return |minValueDuringIteration|+1
-        return minValueDuringIteration>=1? 1: (-1*minValueDuringIteration + 1);
+        return result;
+    }
+
+    private int sumArrElements(int[] nums) {
+        int result = 0;
+
+        for(int num:nums){
+            result+=num;
+        }
+
+        return result;
     }
 }
 

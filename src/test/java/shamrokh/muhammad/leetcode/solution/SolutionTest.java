@@ -18,21 +18,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(5, solution.minStartValue(new int[]{-3,2,-3,4,2}));
+
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(1, solution.minStartValue(new int[]{1,2}));
+
    }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(5, solution.minStartValue(new int[]{1,-2,-3}));
+
     }
 
     @Test
