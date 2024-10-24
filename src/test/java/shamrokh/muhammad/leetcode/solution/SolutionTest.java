@@ -18,21 +18,21 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        assertEquals(2, solution.findLucky(new int[]{2,2,3,4}));
+        assertEquals(5, solution.minStartValue(new int[]{-3,2,-3,4,2}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        assertEquals(3, solution.findLucky(new int[]{1,2,2,3,3,3}));
+        assertEquals(1, solution.minStartValue(new int[]{1,2}));
    }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertEquals(-1, solution.findLucky(new int[]{2,2,2,3,3}));
+        assertEquals(5, solution.minStartValue(new int[]{1,-2,-3}));
     }
 
     @Test
