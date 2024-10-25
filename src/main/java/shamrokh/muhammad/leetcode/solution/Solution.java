@@ -1,41 +1,28 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 class Solution {
-    public List<Integer> minSubsequence(int[] nums) {
-        List<Integer> result = new ArrayList<>();
-        int currentListElementsSum = 0;
-        int numsElementsSum = sumArrElements(nums);
+    public List<String> stringMatching(String[] words) {
+        Set<String> result = new HashSet<>();
+        int length = words.length;
 
-        Arrays.sort(nums);
+        // scanning every string couples
+        for(int i=0;i<length;i++) {
+            for(int j=i+1;j<length;j++) {
+                //checking if words[j] is substring of words[i]
+                if(words[i].contains(words[j])){
+                    result.add(words[j]);
+                }
+                else if(words[j].contains(words[i])) {
+                    result.add(words[i]);
+                }
 
-        // scanning the array from bigger elements to smaller elements
-        for(int i= nums.length-1;i>=0;i--){
-            // adding nums[i] to subsequence
-            result.add(nums[i]);
-            currentListElementsSum+=nums[i];
-            numsElementsSum-=nums[i];
-
-            if(currentListElementsSum > numsElementsSum){
-                break;
             }
         }
 
-        return result;
-    }
-
-    private int sumArrElements(int[] nums) {
-        int result = 0;
-
-        for(int num:nums){
-            result+=num;
-        }
-
-        return result;
+        return new ArrayList<>(result);
     }
 }
 
