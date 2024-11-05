@@ -1,33 +1,92 @@
 package shamrokh.muhammad.leetcode.solution;
 
 
-import java.util.*;
+public class Solution {
+    public String reformat(String s) {
+        int alphabetCount = 0;
+        int numbersCount = 0;
 
-class Solution {
-    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
-        List<Boolean> result = new ArrayList<>(candies.length);
-        // finding max element in array
-        int greatestElementInArray = findGreatestElementInArray(candies);
-
-        // iterating over candies array to build result list
-        for(int elem:candies){
-            // if element + extra candies is bigger than the greatest element in array we insert true to list
-            // otherwise we insert false
-            result.add(elem+extraCandies >= greatestElementInArray);
+        for(int i=0;i<s.length();i++){
+            if(Character.isDigit(s.charAt(i))){
+                numbersCount++;
+            } else {
+                // it is guarantee that we have digits or lowercase characters only
+                alphabetCount++;
+            }
         }
 
-        return result;
+        if(Math.abs(numbersCount-alphabetCount)>1)
+            return "";
+
+        if(numbersCount>alphabetCount){
+            return buildStringStartWithNumbers(s);
+        }
+
+        return buildStringStartWithDigits(s);
     }
 
-    private int findGreatestElementInArray(int[] candies) {
-        int max = candies[0];
+    private String buildStringStartWithDigits(String s) {
+        char[] result = new char[s.length()];
+        int length = s.length();
+        int writeIndex = 0;
+        int alphaIndex = 0;
+        int digitIndex = 0;
 
-        for(int elem:candies){
-            if(elem>max)
-                max = elem;
+        while(alphaIndex < length || digitIndex < length){
+            while(alphaIndex < length && !Character.isAlphabetic(s.charAt(alphaIndex))){
+                alphaIndex++;
+            }
+
+            if(alphaIndex<length) {
+                result[writeIndex] = s.charAt(alphaIndex);
+                writeIndex++;
+                alphaIndex++;
+            }
+
+            while(digitIndex < length && !Character.isDigit(s.charAt(digitIndex)) ){
+                digitIndex++;
+            }
+
+            if(digitIndex < length) {
+                result[writeIndex] = s.charAt(digitIndex);
+                writeIndex++;
+                digitIndex++;
+            }
         }
 
-        return max;
+        return String.valueOf(result);
+    }
+
+    private String buildStringStartWithNumbers(String s) {
+        char[] result = new char[s.length()];
+        int length = s.length();
+        int writeIndex = 0;
+        int alphaIndex = 0;
+        int digitIndex = 0;
+
+        while(alphaIndex < length || digitIndex < length){
+            while(digitIndex < length && !Character.isDigit(s.charAt(digitIndex)) ){
+                digitIndex++;
+            }
+
+            if(digitIndex < length) {
+                result[writeIndex] = s.charAt(digitIndex);
+                writeIndex++;
+                digitIndex++;
+            }
+
+            while(alphaIndex < length && !Character.isAlphabetic(s.charAt(alphaIndex))){
+                alphaIndex++;
+            }
+
+            if(alphaIndex<length) {
+                result[writeIndex] = s.charAt(alphaIndex);
+                writeIndex++;
+                alphaIndex++;
+            }
+        }
+
+        return String.valueOf(result);
     }
 }
 
