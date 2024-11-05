@@ -2,9 +2,6 @@ package shamrokh.muhammad.leetcode.solution;
 
 import org.junit.jupiter.api.*;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,36 +19,33 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        List<String> expected = Arrays.asList("as","hero");
-        List<String> output = solution.stringMatching(new String[]{"mass","as","hero","superhero"});
+        //Input: candies = [2,3,5,1,3], extraCandies = 3
+        //Output: [true,true,true,false,true]
+        List<Boolean> expected = List.of(true,true,true,false,true);
 
-        assertEquals(expected.size(), output.size());
-        assertTrue(expected.containsAll(output));
-        assertTrue(output.containsAll(expected));
+        assertIterableEquals(expected, solution.kidsWithCandies(new int[]{2,3,5,1,3}, 3));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        List<String> expected = Arrays.asList("et","code");
-        List<String> output = solution.stringMatching(new String[]{"leetcode","et","code"});
+        //Input: candies = [4,2,1,1,2], extraCandies = 1
+        //Output: [true,false,false,false,false]
+        List<Boolean> expected = List.of(true,false,false,false,false);
 
-        assertEquals(expected.size(), output.size());
-        assertTrue(expected.containsAll(output));
-        assertTrue(output.containsAll(expected));
+        assertIterableEquals(expected, solution.kidsWithCandies(new int[]{4,2,1,1,2}, 1));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        List<String> expected = List.of();
-        List<String> output = solution.stringMatching(new String[]{"blue","green","bu"});
+        //Input: candies = [12,1,12], extraCandies = 10
+        //Output: [true,false,true]
+        List<Boolean> expected = List.of(true,false,true);
 
-        assertEquals(0, output.size());
-        assertTrue(expected.containsAll(output));
-        assertTrue(output.containsAll(expected));
+        assertIterableEquals(expected, solution.kidsWithCandies(new int[]{12,1,12}, 10));
     }
 
     @Test
