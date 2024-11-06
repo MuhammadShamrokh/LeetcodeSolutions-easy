@@ -2,7 +2,6 @@ package shamrokh.muhammad.leetcode.solution;
 
 import org.junit.jupiter.api.*;
 
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,46 +18,25 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: paths = [["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]
-        //Output: "Sao Paulo"
-        String expected = "Sao Paulo";
-        List<List<String>> functionInput = List.of(
-                List.of("London","New York"),
-                List.of("New York","Lima"),
-                List.of("Lima","Sao Paulo")
-        );
-
-
-        assertEquals(expected, solution.destCity(functionInput));
+        //Input: nums = [1,0,0,0,1,0,0,1], k = 2
+        //Output: true
+        assertTrue(solution.kLengthApart(new int[]{1,0,0,0,1,0,0,1}, 2));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: paths = [["B","C"],["D","B"],["C","A"]]
-        //Output: "A"
-        String expected = "A";
-        List<List<String>> functionInput = List.of(
-                List.of("B","C"),
-                List.of("D","B"),
-                List.of("C","A")
-        );
-
-
-        assertEquals(expected, solution.destCity(functionInput));
+        //Input: nums = [1,0,0,1,0,1], k = 2
+        //Output: false
+        assertFalse(solution.kLengthApart(new int[]{1,0,0,1,0,1}, 2));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        //Input: paths = [["A","Z"]]
-        //Output: "Z"
-        String expected = "Z";
-        List<List<String>> functionInput = List.of(List.of("A","Z"));
-
-        assertEquals(expected, solution.destCity(functionInput));
+        assertFalse(solution.kLengthApart(new int[]{1,0,1}, 2));
     }
 
     @Test

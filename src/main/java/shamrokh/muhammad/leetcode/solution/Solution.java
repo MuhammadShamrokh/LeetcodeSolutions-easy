@@ -1,24 +1,35 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+class Solution {
+    public boolean kLengthApart(int[] nums, int k) {
+        int currentGap = 0;
+        int firstOneAppearanceIndex = 0;
 
-public class Solution {
-    public String destCity(List<List<String>> paths) {
-        Set<String> fromCitySet = new HashSet<>();
-        Set<String> toCitySet = new HashSet<>();
-
-        // iterating over all paths to fill sets
-        for(List<String> direction:paths){
-            fromCitySet.add(direction.get(0));
-            toCitySet.add(direction.get((1)));
+        // finding first '1' appearance
+        while(firstOneAppearanceIndex < nums.length && nums[firstOneAppearanceIndex] != 1){
+            firstOneAppearanceIndex++;
         }
 
-        //subtracting the two sets to find the destCity
-        toCitySet.removeAll(fromCitySet);
+        // nums has no '1' appearances
+        if(firstOneAppearanceIndex == nums.length)
+            return true;
 
-        // it is guarantee that the set will have exactly one element.
-        return toCitySet.stream().findFirst().get();
+
+        // iterating over the rest of nums to check if gaps between 1 are bigger or equal to k
+        for(int i=firstOneAppearanceIndex+1;i<nums.length;i++){
+            if(nums[i] == 1){
+                if(currentGap < k)
+                    // smaller gap was found
+                    return false;
+                else
+                    currentGap = 0;
+
+            } else if(nums[i] == 0){
+                currentGap++;
+            }
+        }
+
+        // all gaps are bigger or equal to k
+        return true;
     }
 }
