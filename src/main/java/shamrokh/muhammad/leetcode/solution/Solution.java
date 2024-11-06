@@ -1,24 +1,24 @@
 package shamrokh.muhammad.leetcode.solution;
 
-class Solution {
-    public int maxPower(String s) {
-        int max = 1;
-        int currentCount = 1;
-        char currentChar = s.charAt(0);
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-        for(int i=1;i<s.length();i++){
-            // new character, we reset counter
-            if(s.charAt(i) != currentChar){
-                currentChar = s.charAt(i);
-                currentCount = 0;
-            }
+public class Solution {
+    public String destCity(List<List<String>> paths) {
+        Set<String> fromCitySet = new HashSet<>();
+        Set<String> toCitySet = new HashSet<>();
 
-            currentCount++;
-            max = Math.max(currentCount,max);
+        // iterating over all paths to fill sets
+        for(List<String> direction:paths){
+            fromCitySet.add(direction.get(0));
+            toCitySet.add(direction.get((1)));
         }
 
-        return max;
+        //subtracting the two sets to find the destCity
+        toCitySet.removeAll(fromCitySet);
+
+        // it is guarantee that the set will have exactly one element.
+        return toCitySet.stream().findFirst().get();
     }
 }
-
-
