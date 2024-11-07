@@ -1,16 +1,16 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
-        int resultCount = 0;
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        // converting sentence into words
+        String[] words = sentence.split(" ");
 
-        //iterating over all intervals
-        for(int i=0;i<startTime.length;i++){
-            //queryTime falls in current student interval
-            if(startTime[i]<=queryTime && endTime[i]>=queryTime)
-                resultCount++;
+        //iterating over words to find a word that searchWord is a prefix
+        for(int i=0;i<words.length;i++){
+            if(words[i].startsWith(searchWord))
+                return i+1;
         }
 
-        return resultCount;
+        return -1;
     }
 }

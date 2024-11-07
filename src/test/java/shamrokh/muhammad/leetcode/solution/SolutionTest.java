@@ -18,25 +18,28 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: startTime = [1,2,3], endTime = [3,2,7], queryTime = 4
-        //Output: 1
-        assertEquals(1, solution.busyStudent(new int[]{1,2,3},new int[]{3,2,7},4));
+        //Input: sentence = "i love eating burger", searchWord = "burg"
+        //Output: 4
+
+        assertEquals(4, solution.isPrefixOfWord("i love eating burger", "burg"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: startTime = [4], endTime = [4], queryTime = 4
-        //Output: 1
-        assertEquals(1, solution.busyStudent(new int[]{4},new int[]{4},4));
+        //Input: sentence = "this problem is an easy problem", searchWord = "pro"
+        //Output: 2
+        assertEquals(2, solution.isPrefixOfWord("this problem is an easy problem", "pro"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        //Input: sentence = "i am tired", searchWord = "you"
+        //Output: -1
+        assertEquals(-1, solution.isPrefixOfWord("i am tired", "you"));
     }
 
     @Test
