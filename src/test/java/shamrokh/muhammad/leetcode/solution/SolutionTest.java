@@ -18,27 +18,25 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: target = [1,2,3,4], arr = [2,4,1,3]
-        //Output: true
-        assertTrue(solution.canBeEqual(new int[]{1,2,3,4}, new int[]{2,4,1,3}));
+        //Input: startTime = [1,2,3], endTime = [3,2,7], queryTime = 4
+        //Output: 1
+        assertEquals(1, solution.busyStudent(new int[]{1,2,3},new int[]{3,2,7},4));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: target = [7], arr = [7]
-        //Output: true
-        assertTrue(solution.canBeEqual(new int[]{7}, new int[]{7}));
+        //Input: startTime = [4], endTime = [4], queryTime = 4
+        //Output: 1
+        assertEquals(1, solution.busyStudent(new int[]{4},new int[]{4},4));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        //Input: target = [3,7,9], arr = [3,7,11]
-        //Output: false
-        assertFalse(solution.canBeEqual(new int[]{3,7,9}, new int[]{3,7,11}));
+
     }
 
     @Test
