@@ -1,35 +1,29 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public boolean kLengthApart(int[] nums, int k) {
-        int currentGap = 0;
-        int firstOneAppearanceIndex = 0;
+    public boolean canBeEqual(int[] target, int[] arr) {
+        int[] arrCharsCounters = new int[1000];
+        int[] targetCharsCounters = new int[1000];
 
-        // finding first '1' appearance
-        while(firstOneAppearanceIndex < nums.length && nums[firstOneAppearanceIndex] != 1){
-            firstOneAppearanceIndex++;
+        //counting elements appearances in array arr
+        for(int elem:arr){
+            arrCharsCounters[elem-1]++;
         }
 
-        // nums has no '1' appearances
-        if(firstOneAppearanceIndex == nums.length)
-            return true;
-
-
-        // iterating over the rest of nums to check if gaps between 1 are bigger or equal to k
-        for(int i=firstOneAppearanceIndex+1;i<nums.length;i++){
-            if(nums[i] == 1){
-                if(currentGap < k)
-                    // smaller gap was found
-                    return false;
-                else
-                    currentGap = 0;
-
-            } else if(nums[i] == 0){
-                currentGap++;
-            }
+        //counting elements appearances in array target
+        for(int elem:target){
+            targetCharsCounters[elem-1]++;
         }
 
-        // all gaps are bigger or equal to k
+        //checking if both arrays have same elements with same amount of appearances
+        //if no, then we can not move from arr to target by reversing sub arrays
+        for(int i=0;i<arrCharsCounters.length;i++){
+            if(arrCharsCounters[i] != targetCharsCounters[i])
+                return false;
+        }
+
+        //both arrays have same elements with same amount of appearances
+        //we can move from arr to target by reversing sub arrays
         return true;
     }
 }

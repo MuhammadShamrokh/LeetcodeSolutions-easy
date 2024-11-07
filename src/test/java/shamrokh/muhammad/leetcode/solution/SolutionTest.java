@@ -18,25 +18,27 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: nums = [1,0,0,0,1,0,0,1], k = 2
+        //Input: target = [1,2,3,4], arr = [2,4,1,3]
         //Output: true
-        assertTrue(solution.kLengthApart(new int[]{1,0,0,0,1,0,0,1}, 2));
+        assertTrue(solution.canBeEqual(new int[]{1,2,3,4}, new int[]{2,4,1,3}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: nums = [1,0,0,1,0,1], k = 2
-        //Output: false
-        assertFalse(solution.kLengthApart(new int[]{1,0,0,1,0,1}, 2));
+        //Input: target = [7], arr = [7]
+        //Output: true
+        assertTrue(solution.canBeEqual(new int[]{7}, new int[]{7}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        assertFalse(solution.kLengthApart(new int[]{1,0,1}, 2));
+        //Input: target = [3,7,9], arr = [3,7,11]
+        //Output: false
+        assertFalse(solution.canBeEqual(new int[]{3,7,9}, new int[]{3,7,11}));
     }
 
     @Test
