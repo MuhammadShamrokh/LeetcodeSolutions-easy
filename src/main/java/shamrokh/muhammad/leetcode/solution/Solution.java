@@ -1,21 +1,15 @@
 package shamrokh.muhammad.leetcode.solution;
 
-public class Solution {
-    public int maxProduct(int[] nums) {
-        int maxValueElement = Integer.MIN_VALUE;
-        int secondMaxValueElement = Integer.MIN_VALUE;
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+        int[] result = new int[nums.length];
+        int currentIndex = 0;
 
-        // iterating over nums array to find 2 max elements
-        for(int elem:nums){
-            if(elem >= maxValueElement){
-                secondMaxValueElement = maxValueElement;
-                maxValueElement = elem;
-            } else if(elem > secondMaxValueElement){
-                secondMaxValueElement = elem;
-            }
+        for(int i=0;i<n;i++){
+            result[currentIndex++] = nums[i];
+            result[currentIndex++] = nums[n+i];
         }
 
-        // returning max product (max element - 1)*(second max element - 1)
-        return (maxValueElement-1)*(secondMaxValueElement-1);
+        return result;
     }
 }
