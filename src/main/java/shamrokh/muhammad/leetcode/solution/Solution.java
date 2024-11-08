@@ -1,27 +1,21 @@
 package shamrokh.muhammad.leetcode.solution;
 
-class Solution {
-    public int[] finalPrices(int[] prices) {
-        int[] result = new int[prices.length];
+public class Solution {
+    public int maxProduct(int[] nums) {
+        int maxValueElement = Integer.MIN_VALUE;
+        int secondMaxValueElement = Integer.MIN_VALUE;
 
-        for(int i=0;i< prices.length;i++){
-            result[i] = prices[i] - getDiscount(i, prices);
-        }
-
-        return result;
-    }
-
-    private int getDiscount(int index, int[] prices){
-        int discount = 0;
-
-
-        for(int i=index+1;i<prices.length;i++){
-            if(prices[index] >= prices[i]){
-                discount = prices[i];
-                break;
+        // iterating over nums array to find 2 max elements
+        for(int elem:nums){
+            if(elem >= maxValueElement){
+                secondMaxValueElement = maxValueElement;
+                maxValueElement = elem;
+            } else if(elem > secondMaxValueElement){
+                secondMaxValueElement = elem;
             }
         }
 
-        return discount;
+        // returning max product (max element - 1)*(second max element - 1)
+        return (maxValueElement-1)*(secondMaxValueElement-1);
     }
 }
