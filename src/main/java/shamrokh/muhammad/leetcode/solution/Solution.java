@@ -1,16 +1,27 @@
 package shamrokh.muhammad.leetcode.solution;
 
 class Solution {
-    public int isPrefixOfWord(String sentence, String searchWord) {
-        // converting sentence into words
-        String[] words = sentence.split(" ");
+    public int[] finalPrices(int[] prices) {
+        int[] result = new int[prices.length];
 
-        //iterating over words to find a word that searchWord is a prefix
-        for(int i=0;i<words.length;i++){
-            if(words[i].startsWith(searchWord))
-                return i+1;
+        for(int i=0;i< prices.length;i++){
+            result[i] = prices[i] - getDiscount(i, prices);
         }
 
-        return -1;
+        return result;
+    }
+
+    private int getDiscount(int index, int[] prices){
+        int discount = 0;
+
+
+        for(int i=index+1;i<prices.length;i++){
+            if(prices[index] >= prices[i]){
+                discount = prices[i];
+                break;
+            }
+        }
+
+        return discount;
     }
 }

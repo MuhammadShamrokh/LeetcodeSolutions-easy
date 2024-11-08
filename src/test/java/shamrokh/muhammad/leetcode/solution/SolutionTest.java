@@ -18,35 +18,40 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: sentence = "i love eating burger", searchWord = "burg"
-        //Output: 4
+        //Input: prices = [8,4,6,2,3]
+        //Output: [4,2,4,2,3]
+        int[] expected = new int[]{4,2,4,2,3};
 
-        assertEquals(4, solution.isPrefixOfWord("i love eating burger", "burg"));
+        assertArrayEquals(expected, solution.finalPrices(new int[]{8,4,6,2,3}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: sentence = "this problem is an easy problem", searchWord = "pro"
-        //Output: 2
-        assertEquals(2, solution.isPrefixOfWord("this problem is an easy problem", "pro"));
+        //Input: prices = [1,2,3,4,5]
+        //Output: [1,2,3,4,5]
+        int[] expected = new int[]{1,2,3,4,5};
+
+        assertArrayEquals(expected, solution.finalPrices(new int[]{1,2,3,4,5}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        //Input: sentence = "i am tired", searchWord = "you"
-        //Output: -1
-        assertEquals(-1, solution.isPrefixOfWord("i am tired", "you"));
+        //Input: prices = [10,1,1,6]
+        //Output: [9,0,1,6]
+        int[] expected = new int[]{9,0,1,6};
+
+        assertArrayEquals(expected, solution.finalPrices(new int[]{10,1,1,6}));
+
     }
 
     @Test
     @Order(4)
     @DisplayName("Test 4")
     void TestFour(){
-
     }
 
 }
