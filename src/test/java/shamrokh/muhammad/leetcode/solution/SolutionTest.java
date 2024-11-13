@@ -18,18 +18,18 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: n = 5, start = 0
-        //Output: 8
-        assertEquals(8, solution.xorOperation(5, 0));
+        //Input: path = "NES"
+        //Output: false
+        assertFalse(solution.isPathCrossing("NES"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: n = 4, start = 3
-        //Output: 8
-        assertEquals(8, solution.xorOperation(4, 3));
+        //Input: path = "NESWW"
+        //Output: true
+        assertTrue(solution.isPathCrossing("NESWW"));
     }
 
     @Test
