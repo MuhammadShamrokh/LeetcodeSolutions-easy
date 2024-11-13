@@ -2,14 +2,15 @@ package shamrokh.muhammad.leetcode.solution;
 
 
 class Solution {
-    public int[] runningSum(int[] nums) {
-        int[] runningSumArray = new int[nums.length];
+    public int xorOperation(int n, int start) {
+        int result = start;
+        int currentElement = start;
 
-        runningSumArray[0] = nums[0];
-        for(int i=1;i< nums.length;i++){
-            runningSumArray[i] = runningSumArray[i-1] + nums[i];
+        for(int i=1;i<n;i++){
+            currentElement += 2;
+            result ^= currentElement;
         }
 
-        return runningSumArray;
+        return result;
     }
 }
