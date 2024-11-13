@@ -18,18 +18,18 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: path = "NES"
+        //Input: arr = [1,2,4]
         //Output: false
-        assertFalse(solution.isPathCrossing("NES"));
+        assertFalse(solution.canMakeArithmeticProgression(new int[]{1, 2, 4}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: path = "NESWW"
+        //Input: arr = [3,5,1]
         //Output: true
-        assertTrue(solution.isPathCrossing("NESWW"));
+        assertTrue(solution.canMakeArithmeticProgression(new int[]{3, 5, 1}));
     }
 
     @Test
