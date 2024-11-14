@@ -18,18 +18,18 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: arr = [1,2,4]
-        //Output: false
-        assertFalse(solution.canMakeArithmeticProgression(new int[]{1, 2, 4}));
+        //Input: low = 3, high = 7
+        //Output: 3
+        assertEquals(3, solution.countOdds(3,7));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: arr = [3,5,1]
-        //Output: true
-        assertTrue(solution.canMakeArithmeticProgression(new int[]{3, 5, 1}));
+        //Input: low = 8, high = 10
+        //Output: 1
+        assertEquals(1, solution.countOdds(8,10));
     }
 
     @Test
