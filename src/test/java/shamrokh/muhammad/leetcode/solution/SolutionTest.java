@@ -18,25 +18,27 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: low = 3, high = 7
-        //Output: 3
-        assertEquals(3, solution.countOdds(3,7));
+        //Input: nums = [1,2,3,1,1,3]
+        //Output: 4
+        assertEquals(4, solution.numIdenticalPairs(new int[]{1,2,3,1,1,3}));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: low = 8, high = 10
-        //Output: 1
-        assertEquals(1, solution.countOdds(8,10));
+        //Input: nums = [1,1,1,1]
+        //Output: 6
+        assertEquals(6, solution.numIdenticalPairs(new int[]{1,1,1,1}));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        //Input: nums = [1,2,3]
+        //Output: 0
+        assertEquals(0, solution.numIdenticalPairs(new int[]{1,2,3}));
     }
 
     @Test
