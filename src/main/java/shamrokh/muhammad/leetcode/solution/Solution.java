@@ -1,24 +1,22 @@
 package shamrokh.muhammad.leetcode.solution;
 
 public class Solution {
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int numOfEmptyBottles = 0;
+        int maxNumberOfBottles = 0;
 
-    public int numIdenticalPairs(int[] nums) {
-        int[] counters = new int[100];
-        int result = 0;
+        // we loop while we have more bottles to drink
+        while(numBottles > 0){
+            // drink bottles and update counter
+            maxNumberOfBottles += numBottles;
+            numOfEmptyBottles += numBottles;
 
-        // counting number of appearances for each element
-        for(int elem:nums)
-            counters[elem-1]++;
+            // exchange empty bottles for full bottles
+            numBottles = numOfEmptyBottles / numExchange;
+            // reduce the exchanged empty bottles from the number of empty bottles
+            numOfEmptyBottles -= numBottles * numExchange;
+        }
 
-        //for each count >= 2, we have 1+2+...+(count-1) pairs
-        for(int count:counters)
-            if(count >= 2)
-                result += sumTillN(count - 1);
-
-        return result;
-    }
-
-    private int sumTillN(int n){
-        return (n*(n+1))/2;
+        return maxNumberOfBottles;
     }
 }

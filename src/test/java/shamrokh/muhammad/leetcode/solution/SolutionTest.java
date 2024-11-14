@@ -18,27 +18,25 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: nums = [1,2,3,1,1,3]
-        //Output: 4
-        assertEquals(4, solution.numIdenticalPairs(new int[]{1,2,3,1,1,3}));
+        //Input: numBottles = 9, numExchange = 3
+        //Output: 13
+        assertEquals(13, solution.numWaterBottles(9, 3));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: nums = [1,1,1,1]
-        //Output: 6
-        assertEquals(6, solution.numIdenticalPairs(new int[]{1,1,1,1}));
+        //Input: numBottles = 15, numExchange = 4
+        //Output: 19
+        assertEquals(19, solution.numWaterBottles(15, 4));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        //Input: nums = [1,2,3]
-        //Output: 0
-        assertEquals(0, solution.numIdenticalPairs(new int[]{1,2,3}));
+
     }
 
     @Test
