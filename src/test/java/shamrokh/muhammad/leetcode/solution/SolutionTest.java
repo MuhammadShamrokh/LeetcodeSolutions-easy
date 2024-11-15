@@ -18,18 +18,18 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
-        //Output: "leetcode"
-        assertEquals("leetcode", solution.restoreString("codeleet", new int[]{4,5,6,7,0,2,1,3}));
+        //Input: arr = [3,0,1,1,9,7], a = 7, b = 2, c = 3
+        //Output: 4
+        assertEquals(4, solution.countGoodTriplets(new int[]{3,0,1,1,9,7}, 7, 2, 3));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: s = "abc", indices = [0,1,2]
-        //Output: "abc"
-        assertEquals("abc", solution.restoreString("abc", new int[]{0,1,2}));
+        //Input: arr = [1,1,2,2,3], a = 0, b = 0, c = 1
+        //Output: 0
+        assertEquals(0, solution.countGoodTriplets(new int[]{1,1,2,2,3}, 0, 0, 1));
     }
 
     @Test

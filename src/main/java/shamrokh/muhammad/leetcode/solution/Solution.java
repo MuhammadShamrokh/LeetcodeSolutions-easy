@@ -2,15 +2,20 @@ package shamrokh.muhammad.leetcode.solution;
 
 
 public class Solution {
-    public String restoreString(String s, int[] indices) {
-        char[] result = new char[s.length()];
+    public int countGoodTriplets(int[] arr, int a, int b, int c) {
+        int result = 0;
 
-        // preparing the result characters array according to indices
-        for(int i=0;i<s.length();i++){
-            result[indices[i]] = s.charAt(i);
+        // checking all triples in arr
+        for(int i=0;i<arr.length-2;i++){
+            for(int j=i+1;j<arr.length-1;j++){
+                for(int k=j+1;k<arr.length;k++){
+                    //checking condition
+                    if(Math.abs(arr[i]-arr[j]) <= a && Math.abs(arr[j]-arr[k]) <= b && Math.abs(arr[i]-arr[k]) <= c)
+                        result++;
+                }
+            }
         }
 
-        // converting array to String and returning the result
-        return new String(result);
+        return result;
     }
 }
