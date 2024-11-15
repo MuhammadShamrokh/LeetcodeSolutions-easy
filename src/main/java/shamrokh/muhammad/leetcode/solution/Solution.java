@@ -1,22 +1,31 @@
 package shamrokh.muhammad.leetcode.solution;
 
 public class Solution {
-    public int numWaterBottles(int numBottles, int numExchange) {
-        int numOfEmptyBottles = 0;
-        int maxNumberOfBottles = 0;
+    public int findKthPositive(int[] arr, int k) {
+        int missingPositiveNumbersFound = 0;
+        int currentSearchingNumber = 1;
+        int currentIndex = 0;
 
-        // we loop while we have more bottles to drink
-        while(numBottles > 0){
-            // drink bottles and update counter
-            maxNumberOfBottles += numBottles;
-            numOfEmptyBottles += numBottles;
+        // iterating over arr elements to detect missing numbers
+        while(currentIndex < arr.length){
+            if(currentSearchingNumber != arr[currentIndex]){
+                // found another missing number
+                missingPositiveNumbersFound++;
 
-            // exchange empty bottles for full bottles
-            numBottles = numOfEmptyBottles / numExchange;
-            // reduce the exchanged empty bottles from the number of empty bottles
-            numOfEmptyBottles -= numBottles * numExchange;
+                //checking if kth Positive
+                if(missingPositiveNumbersFound == k)
+                    return currentSearchingNumber;
+
+            } else {
+                // number we're looking for exists in arr, we move to next index
+                currentIndex++;
+            }
+
+            currentSearchingNumber++;
         }
 
-        return maxNumberOfBottles;
+        // we did not find kth missing positive number inside arr
+        return currentSearchingNumber + (k - missingPositiveNumbersFound) - 1;
     }
+
 }
