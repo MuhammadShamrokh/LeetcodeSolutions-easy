@@ -18,25 +18,27 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: arr = [3,0,1,1,9,7], a = 7, b = 2, c = 3
-        //Output: 4
-        assertEquals(4, solution.countGoodTriplets(new int[]{3,0,1,1,9,7}, 7, 2, 3));
+        //Input: n = 987
+        //Output: "987"
+        assertEquals("987", solution.thousandSeparator(987));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: arr = [1,1,2,2,3], a = 0, b = 0, c = 1
-        //Output: 0
-        assertEquals(0, solution.countGoodTriplets(new int[]{1,1,2,2,3}, 0, 0, 1));
+        //Input: n = 1234
+        //Output: "1.234"
+        assertEquals("1.234", solution.thousandSeparator(1234));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-
+        //Input: n = 0
+        //Output: "0"
+        assertEquals("0", solution.thousandSeparator(0));
     }
 
     @Test

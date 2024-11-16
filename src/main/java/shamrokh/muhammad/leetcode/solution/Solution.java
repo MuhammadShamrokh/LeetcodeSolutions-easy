@@ -2,20 +2,30 @@ package shamrokh.muhammad.leetcode.solution;
 
 
 public class Solution {
-    public int countGoodTriplets(int[] arr, int a, int b, int c) {
-        int result = 0;
+    public String thousandSeparator(int n) {
+        StringBuilder sb = new StringBuilder().append(n%10);
+        int digitCount = 1;
+        n /= 10;
 
-        // checking all triples in arr
-        for(int i=0;i<arr.length-2;i++){
-            for(int j=i+1;j<arr.length-1;j++){
-                for(int k=j+1;k<arr.length;k++){
-                    //checking condition
-                    if(Math.abs(arr[i]-arr[j]) <= a && Math.abs(arr[j]-arr[k]) <= b && Math.abs(arr[i]-arr[k]) <= c)
-                        result++;
-                }
+        while(n>0){
+            // three digits were added, adding separator
+            if(digitCount%3==0){
+                sb.append(".");
             }
+
+            // adding next digit to string
+            int digit = n%10;
+            sb.append(digit);
+            digitCount++;
+
+            n /= 10;
         }
 
-        return result;
+        // removing extra separator if exists
+        if(sb.charAt(sb.length()-1) == '.')
+            sb.setLength(sb.length()-1);
+
+        // reversing built string
+        return sb.reverse().toString();
     }
 }
