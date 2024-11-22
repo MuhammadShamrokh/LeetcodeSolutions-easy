@@ -1,31 +1,28 @@
 package shamrokh.muhammad.leetcode.solution;
 
-
 public class Solution {
-    public String thousandSeparator(int n) {
-        StringBuilder sb = new StringBuilder().append(n%10);
-        int digitCount = 1;
-        n /= 10;
+    public String makeGood(String s) {
+        StringBuilder sb = new StringBuilder();
 
-        while(n>0){
-            // three digits were added, adding separator
-            if(digitCount%3==0){
-                sb.append(".");
+        // iterating over string to detect adjacent characters that make string bad
+        for(int i=0;i<s.length();i++){
+            // empty stack, we just insert the current character
+            if(sb.isEmpty()){
+                sb.append(s.charAt(i));
+            } else { // stack is not empty
+                // bad adjacent characters, we remove them
+                // remove first character and ignore second one
+                if (Character.isLowerCase(s.charAt(i)) != Character.isLowerCase(sb.charAt(sb.length()-1)) &&
+                    Character.toLowerCase(s.charAt(i)) == Character.toLowerCase(sb.charAt(sb.length()-1))){
+                    sb.setLength(sb.length()-1);
+                } else {
+                    sb.append(s.charAt(i));
+                }
             }
-
-            // adding next digit to string
-            int digit = n%10;
-            sb.append(digit);
-            digitCount++;
-
-            n /= 10;
         }
 
-        // removing extra separator if exists
-        if(sb.charAt(sb.length()-1) == '.')
-            sb.setLength(sb.length()-1);
-
-        // reversing built string
-        return sb.reverse().toString();
+        return sb.toString();
     }
 }
+
+

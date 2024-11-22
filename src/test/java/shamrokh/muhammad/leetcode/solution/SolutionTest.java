@@ -18,27 +18,27 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: n = 987
-        //Output: "987"
-        assertEquals("987", solution.thousandSeparator(987));
+        //Input: s = "leEeetcode"
+        //Output: "leetcode"
+        assertEquals("leetcode", solution.makeGood("leEeetcode"));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: n = 1234
-        //Output: "1.234"
-        assertEquals("1.234", solution.thousandSeparator(1234));
+        //Input: s = "abBAcC"
+        //Output: ""
+        assertEquals("", solution.makeGood("abBAcC"));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        //Input: n = 0
-        //Output: "0"
-        assertEquals("0", solution.thousandSeparator(0));
+        //Input: s = "s"
+        //Output: "s"
+        assertEquals("s", solution.makeGood("s"));
     }
 
     @Test
