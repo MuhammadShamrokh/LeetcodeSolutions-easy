@@ -1,27 +1,25 @@
 package shamrokh.muhammad.leetcode.solution;
 
 public class Solution {
-    public String makeGood(String s) {
-        StringBuilder sb = new StringBuilder();
+    public int diagonalSum(int[][] mat) {
+        int length = mat.length;
+        int sum = 0;
 
-        // iterating over string to detect adjacent characters that make string bad
-        for(int i=0;i<s.length();i++){
-            // empty stack, we just insert the current character
-            if(sb.isEmpty()){
-                sb.append(s.charAt(i));
-            } else { // stack is not empty
-                // bad adjacent characters, we remove them
-                // remove first character and ignore second one
-                if (Character.isLowerCase(s.charAt(i)) != Character.isLowerCase(sb.charAt(sb.length()-1)) &&
-                    Character.toLowerCase(s.charAt(i)) == Character.toLowerCase(sb.charAt(sb.length()-1))){
-                    sb.setLength(sb.length()-1);
-                } else {
-                    sb.append(s.charAt(i));
-                }
-            }
+        // sum primary diagonal
+        for(int i=0;i<length;i++){
+            sum += mat[i][i];
         }
 
-        return sb.toString();
+        // sum secondary diagonal
+        for(int i=length-1;i>=0;i--){
+            sum += mat[i][length - i -1];
+        }
+
+        // if mat.length is odd, we subtract middle element
+        if(length %2 == 1)
+            sum -= mat[length/2][length/2];
+
+        return sum;
     }
 }
 

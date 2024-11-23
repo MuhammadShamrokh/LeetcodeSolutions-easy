@@ -18,27 +18,39 @@ class SolutionTest {
     @Order(1)
     @DisplayName("Test 1")
     void TestOne(){
-        //Input: s = "leEeetcode"
-        //Output: "leetcode"
-        assertEquals("leetcode", solution.makeGood("leEeetcode"));
+        //Input: mat = [[1,2,3],
+        //              [4,5,6],
+        //              [7,8,9]]
+        //Output: 25
+        int[][] input = new int[][]{{1,2,3},
+                                    {4,5,6},
+                                    {7,8,9}};
+
+        assertEquals(25, solution.diagonalSum(input));
     }
 
     @Test
     @Order(2)
     @DisplayName("Test 2")
     void TestTwo(){
-        //Input: s = "abBAcC"
-        //Output: ""
-        assertEquals("", solution.makeGood("abBAcC"));
+        //Input: mat = [[1,1,1,1],
+        //              [1,1,1,1],
+        //              [1,1,1,1],
+        //              [1,1,1,1]]
+        //Output: 8
+        int[][] input = new int[][]{{1,1,1,1},
+                                    {1,1,1,1},
+                                    {1,1,1,1},
+                                    {1,1,1,1}};
+
+        assertEquals(8, solution.diagonalSum(input));
     }
 
     @Test
     @Order(3)
     @DisplayName("Test 3")
     void TestThree(){
-        //Input: s = "s"
-        //Output: "s"
-        assertEquals("s", solution.makeGood("s"));
+
     }
 
     @Test
