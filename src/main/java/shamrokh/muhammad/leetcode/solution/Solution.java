@@ -1,25 +1,33 @@
 package shamrokh.muhammad.leetcode.solution;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Solution {
-    public int diagonalSum(int[][] mat) {
-        int length = mat.length;
-        int sum = 0;
+    public List<Integer> mostVisited(int n, int[] rounds) {
+        int start = rounds[0];
+        int end = rounds[rounds.length-1];
+        List<Integer> result = new ArrayList<>();
 
-        // sum primary diagonal
-        for(int i=0;i<length;i++){
-            sum += mat[i][i];
+        // starting sector is equal to ending sector, he is the most visited sector
+        if(start == end)
+            return List.of(start);
+
+        // starting sector is smaller than ending sector
+        if(start < end){
+            for(int i=start;i<=end;i++){
+                result.add(i);
+            }
+        } else { // start > end
+            for(int i=1;i<=end;i++){
+                result.add(i);
+            }
+            for(int i=start;i<=n;i++){
+                result.add(i);
+            }
         }
 
-        // sum secondary diagonal
-        for(int i=length-1;i>=0;i--){
-            sum += mat[i][length - i -1];
-        }
-
-        // if mat.length is odd, we subtract middle element
-        if(length %2 == 1)
-            sum -= mat[length/2][length/2];
-
-        return sum;
+        return result;
     }
 }
 
