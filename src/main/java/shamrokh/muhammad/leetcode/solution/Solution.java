@@ -1,49 +1,56 @@
 package shamrokh.muhammad.leetcode.solution;
 
-
 public class Solution {
-    public boolean containsPattern(int[] arr, int m, int k) {
-        // implementing sliding window to iterate over all m length sub-arrays
-        int currentPatternStart = 0;
-        int currentPatternEnd = m;
-        int currentCheckPatternStart = 0;
-        int currentCheckPatternEnd = m;
-        int currentConsecutiveCounter = 0;
+    public int sumOddLengthSubarrays(int[] arr) {
+        int sum = 0;
+        int oddArraySize = 1;
 
-        while(currentCheckPatternEnd <= arr.length){
-            if(checkIfSubArraysEqual(arr,currentPatternStart,currentPatternEnd,currentCheckPatternStart,currentCheckPatternEnd)){
-                currentConsecutiveCounter++;
-
-                if(currentConsecutiveCounter >=k)
-                    return true;
-
-                currentCheckPatternStart += m;
-                currentCheckPatternEnd += m;
-            } else {
-                currentConsecutiveCounter = 0;
-                currentPatternStart = currentCheckPatternStart;
-                currentPatternEnd = currentCheckPatternEnd;
-            }
+        while(oddArraySize <= arr.length){
+            sum += sumAllSubArraysInSizeN(arr, oddArraySize);
+            oddArraySize += 2;
         }
 
-        return false;
+        return sum;
     }
 
-    private boolean checkIfSubArraysEqual(int[] arr, int start1, int end1, int start2, int end2){
-        // not equal sub-arrays
-        if(end2-start2 != end1-start1)
-            return false;
-
-        while(start1 < end1){
-            if(arr[start1] != arr[start2])
-                return false;
-
-            start1++;
-            start2++;
+    private int sumAllSubArraysInSizeN(int[] arr, int n){
+        int length = arr.length;
+        if(n>length){
+            return 0;
+        }
+        if(n==length){
+            return sumArr(arr,0,length);
         }
 
-        return true;
+        int start = 0;
+        int end = n;
+        int slidingWindowSum=sumArr(arr, start, end);
+        int result=slidingWindowSum;
+
+        while(end < length){
+            // moving sliding window left pointer
+            slidingWindowSum -= arr[start];
+            start++;
+            // moving sliding window right pointer
+            slidingWindowSum += arr[end];
+            end++;
+
+            // adding current sliding window sum to total sum result
+            result += slidingWindowSum;
+        }
+
+        return result;
     }
+
+    private int sumArr(int[] arr, int from, int to){
+        int result = 0;
+
+        for(int i=from;i<to;i++){
+            result += arr[i];
+        }
+
+        return result;
+    }
+
+
 }
-
-
