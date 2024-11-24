@@ -1,33 +1,48 @@
 package shamrokh.muhammad.leetcode.solution;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Solution {
-    public List<Integer> mostVisited(int n, int[] rounds) {
-        int start = rounds[0];
-        int end = rounds[rounds.length-1];
-        List<Integer> result = new ArrayList<>();
+    public boolean containsPattern(int[] arr, int m, int k) {
+        // implementing sliding window to iterate over all m length sub-arrays
+        int currentPatternStart = 0;
+        int currentPatternEnd = m;
+        int currentCheckPatternStart = 0;
+        int currentCheckPatternEnd = m;
+        int currentConsecutiveCounter = 0;
 
-        // starting sector is equal to ending sector, he is the most visited sector
-        if(start == end)
-            return List.of(start);
+        while(currentCheckPatternEnd <= arr.length){
+            if(checkIfSubArraysEqual(arr,currentPatternStart,currentPatternEnd,currentCheckPatternStart,currentCheckPatternEnd)){
+                currentConsecutiveCounter++;
 
-        // starting sector is smaller than ending sector
-        if(start < end){
-            for(int i=start;i<=end;i++){
-                result.add(i);
-            }
-        } else { // start > end
-            for(int i=1;i<=end;i++){
-                result.add(i);
-            }
-            for(int i=start;i<=n;i++){
-                result.add(i);
+                if(currentConsecutiveCounter >=k)
+                    return true;
+
+                currentCheckPatternStart += m;
+                currentCheckPatternEnd += m;
+            } else {
+                currentConsecutiveCounter = 0;
+                currentPatternStart = currentCheckPatternStart;
+                currentPatternEnd = currentCheckPatternEnd;
             }
         }
 
-        return result;
+        return false;
+    }
+
+    private boolean checkIfSubArraysEqual(int[] arr, int start1, int end1, int start2, int end2){
+        // not equal sub-arrays
+        if(end2-start2 != end1-start1)
+            return false;
+
+        while(start1 < end1){
+            if(arr[start1] != arr[start2])
+                return false;
+
+            start1++;
+            start2++;
+        }
+
+        return true;
     }
 }
 
